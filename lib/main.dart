@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: const Color.fromRGBO(0x43, 0x28, 0x18, 25),
                 ),
                 child: Text(
-                  'Menü',
+                  'Menüblabla',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
