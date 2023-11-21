@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/footer.dart';
+import 'package:studi_cafe/sidebar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,76 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
         title: Text(widget.title),
       ),
-      drawer: Drawer(
-          // Navigation Drawer
-          backgroundColor: Colors.white,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(0x43, 0x28, 0x18, 25),
-                ),
-                child: Text(
-                  'Menü',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Home'),
-                onTap: () {
-                  // Aktion bei Klick auf "Info"
-                  Navigator.pop(context); // Schließt den Drawer
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.meeting_room_outlined),
-                title: Text('Räume'),
-                onTap: () {
-                  // Aktion bei Klick auf "Info"
-                  Navigator.pop(context); // Schließt den Drawer
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.restaurant_menu),
-                title: Text('Menü'),
-                onTap: () {
-                  // Aktion bei Klick auf "Räume"
-                  Navigator.pop(context); // Schließt den Drawer
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.event),
-                title: Text('Events'),
-                onTap: () {
-                  // Aktion bei Klick auf "Kontakt"
-                  Navigator.pop(context); // Schließt den Drawer
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.info_outline),
-                title: Text('Info'),
-                onTap: () {
-                  // Aktion bei Klick auf "Räume"
-                  Navigator.pop(context); // Schließt den Drawer
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.contacts),
-                title: Text('Kontakt'),
-                onTap: () {
-                  // Aktion bei Klick auf "Räume"
-                  Navigator.pop(context); // Schließt den Drawer
-                },
-              ),
-            ],
-          ),
-        ),
-
+      
+      drawer: appSidebar,
         
       body: Center(
         child:
@@ -132,38 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
 
-      bottomNavigationBar: BottomAppBar(
-        height: 45,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              TextButton(
-                onPressed: () {
-                  // Aktion für Impressum
-                },
-                child: Text('Impressum'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Aktion für AGB
-                },
-                child: Text('AGB'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Aktion für Datenschutz
-                },
-                child: Text('Datenschutz'),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Aktion für Über uns
-                },
-                child: Text('Über uns'),
-              ),
-            ],
-          ), // Ende Child
-        ), //Ende Footer
+      bottomNavigationBar: appFooter,
     );
   }
 }
