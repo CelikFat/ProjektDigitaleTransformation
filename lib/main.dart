@@ -45,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
         title: Text(widget.title),
+        actions: [
+          Image.asset('assets/images/app_logo_klein.png'),
+        ],
       ),
       
       drawer: appSidebar,
@@ -54,13 +57,24 @@ class _MyHomePageState extends State<MyHomePage> {
         Column(  
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Hauptteil',
+            Text (
+              "Willkommen im Studi-Cafe",
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
-            Text(
-              '0',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Text (
+              'unsere Sponsoren:',
+            ),    
+            SizedBox(height: 30),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton(onPressed: null, child: Text('KSK')),
+                ElevatedButton(onPressed: null, child: Text('SIA')),
+              ],
             ),
+            
           ],
         ),
       ),
