@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:studi_cafe/food%20menu/menu_item.dart';
-import 'package:studi_cafe/food%20menu/menu_lists_file.dart';
+import 'package:studi_cafe/food_menu/menu_item.dart';
+import 'package:studi_cafe/food_menu/menu_lists_file.dart';
 import 'package:studi_cafe/footer.dart';
 import 'package:studi_cafe/sidebar.dart';
 import 'package:google_fonts/google_fonts.dart' as google_fonts;

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/footer.dart';
 import 'package:studi_cafe/sidebar.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,21 +21,22 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: ''),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  var selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,40 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
-        title: Text(widget.title),
         actions: [
-          Image.asset('assets/images/app_logo_klein.png'),
+          Image.asset('assets/logo/app_logo_klein.png'),
         ],
       ),
       
       drawer: appSidebar,
         
-      body: Center(
-        child:
-        Column(  
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text (
-              "Willkommen im Studi-Cafe",
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Text (
-              'unsere Sponsoren:',
-            ),    
-            SizedBox(height: 30),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton(onPressed: null, child: Text('KSK')),
-                ElevatedButton(onPressed: null, child: Text('SIA')),
-              ],
-            ),
-            
-          ],
-        ),
-      ),
+      body: Expanded(child: HomePage(),),
 
 
       bottomNavigationBar: appFooter,

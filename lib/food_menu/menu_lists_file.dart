@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studi_cafe/food%20menu/menu_item.dart';
+import 'package:studi_cafe/food_menu/menu_item.dart';
 
 const List<(List<Item>, String)> listMenus = [
   (exampleMenu1, "My exampleMenu1"),
