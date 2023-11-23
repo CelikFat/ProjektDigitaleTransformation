@@ -68,42 +68,62 @@ class _MenuPageState extends State<MenuPage> {
 
   Widget _buildMenuList() {
     return ListView.separated(
-      padding: const EdgeInsets.all(16),
-      itemCount: exampleMenu.length + 1,
-      separatorBuilder: (context, index) {
-        return const SizedBox(
-          height: 15,
+    padding: const EdgeInsets.all(16),
+    itemCount: listMenus.length + 1, // One extra for the header
+    separatorBuilder: (context, index) {
+      return const SizedBox(
+        height: 15,
+      );
+    },
+    itemBuilder: (context, index) {
+      if (index == 0) {
+        // Display header for the entire menu list
+        return Container(
+          color: Color(0xFFD98E44),
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.2,
+          child: Center(
+            child: Text(
+              'Speisekarte StudiCafe Albstadt',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: google_fonts.GoogleFonts.dancingScript(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                fontStyle: FontStyle.italic,
+                wordSpacing: 2.0,
+              ),
+            ),
+          ),
         );
-      },
-      itemBuilder: (context, index) {
-        if (index == 0) {
-          return Container(
-            color: Color(0xFFD98E44),
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.2,
-            child: Center(
-              child: Text(
-                'Speisekarte StudiCafe Albstadt',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: google_fonts.GoogleFonts.dancingScript(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  fontStyle: FontStyle.italic,
-                  wordSpacing: 2.0
+      } else {
+        // Display menu items for each menu
+        final menu = listMenus[index - 1];
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header for each menu
+            Container(
+              color: Colors.grey, // Choose a color for the header
+              width: double.infinity,
+              padding: EdgeInsets.all(8),
+              child: const Center(
+                child: Text(
+                  "example",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
-          );
-        }
-        else {
-          final item = exampleMenu[index - 1];
-          return _buildMenuItem(
-            item: item,
-          );
-        }
-      },
-    );
+            // Menu items for each menu
+            ...menu.map((item) => _buildMenuItem(item: item)).toList(),
+          ],
+        );
+      }
+    },
+  );
   }
 
   Widget _buildMenuItem( { required Item item}) {
