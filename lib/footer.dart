@@ -9,25 +9,25 @@ var appFooter = BottomAppBar(
                 onPressed: () {
                   // Aktion für Impressum
                 },
-                child: Text('Impressum'),
+                child: const Text('Impressum'),
               ),
               TextButton(
                 onPressed: () {
                   // Aktion für AGB
                 },
-                child: Text('AGB'),
+                child: const Text('AGB'),
               ),
               TextButton(
                 onPressed: () {
                   // Aktion für Datenschutz
                 },
-                child: Text('Datenschutz'),
+                child: const Text('Datenschutz'),
               ),
               TextButton(
                 onPressed: () {
                   // Aktion für Über uns
                 },
-                child: Text('Über uns'),
+                child: const Text('Über uns'),
               ),
             ],
           ),

@@ -5,9 +5,9 @@ var appSidebar = Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              DrawerHeader(
+              const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: const Color.fromRGBO(0x43, 0x28, 0x18, 25),
+                  color: Color.fromRGBO(0x43, 0x28, 0x18, 25),
                 ),
                 child: Text(
                   'Menü',
@@ -18,43 +18,43 @@ var appSidebar = Drawer(
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Home'),
+                leading: const Icon(Icons.home),
+                title: const Text('Home'),
                 onTap: () {
                   // Aktion bei Klick auf "Info"
                 },
               ),
               ListTile(
-                leading: Icon(Icons.meeting_room_outlined),
-                title: Text('Räume'),
+                leading: const Icon(Icons.meeting_room_outlined),
+                title: const Text('Räume'),
                 onTap: () {
                   // Aktion bei Klick auf "Info"
                 },
               ),
               ListTile(
-                leading: Icon(Icons.restaurant_menu),
-                title: Text('Menü'),
+                leading: const Icon(Icons.restaurant_menu),
+                title: const Text('Menü'),
                 onTap: () {
                   // Aktion bei Klick auf "Räume"
                 },
               ),
               ListTile(
-                leading: Icon(Icons.event),
-                title: Text('Events'),
+                leading: const Icon(Icons.event),
+                title: const Text('Events'),
                 onTap: () {
                   // Aktion bei Klick auf "Kontakt"
                 },
               ),
               ListTile(
-                leading: Icon(Icons.info_outline),
-                title: Text('Info'),
+                leading: const Icon(Icons.info_outline),
+                title: const Text('Info'),
                 onTap: () {
                   // Aktion bei Klick auf "Räume"
                 },
               ),
               ListTile(
-                leading: Icon(Icons.contacts),
-                title: Text('Kontakt'),
+                leading: const Icon(Icons.contacts),
+                title: const Text('Kontakt'),
                 onTap: () {
                   // Aktion bei Klick auf "Räume"
                 },
