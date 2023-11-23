@@ -58,25 +58,6 @@ class _MenuPageState extends State<MenuPage> {
         Column(
           children: [
             Expanded(
-              child: Container(
-                color: Color(0xFFD98E44),
-                width: double.infinity,
-                child: Center(
-                  child: Text(
-                    'Speisekarte StudiCafe Albstadt',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: google_fonts.GoogleFonts.dancingScript(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      fontStyle: FontStyle.italic,
-                      wordSpacing: 2.0
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
               child: _buildMenuList(),
             ),
           ],
@@ -88,26 +69,48 @@ class _MenuPageState extends State<MenuPage> {
   Widget _buildMenuList() {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
-      itemCount: exampleMenu.length,
+      itemCount: exampleMenu.length + 1,
       separatorBuilder: (context, index) {
         return const SizedBox(
-          height: 12,
+          height: 15,
         );
       },
       itemBuilder: (context, index) {
-        final item = exampleMenu[index];
-        return _buildMenuItem(
-          item: item,
-        );
+        if (index == 0) {
+          return Container(
+            color: Color(0xFFD98E44),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.2,
+            child: Center(
+              child: Text(
+                'Speisekarte StudiCafe Albstadt',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: google_fonts.GoogleFonts.dancingScript(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  fontStyle: FontStyle.italic,
+                  wordSpacing: 2.0
+                ),
+              ),
+            ),
+          );
+        }
+        else {
+          final item = exampleMenu[index - 1];
+          return _buildMenuItem(
+            item: item,
+          );
+        }
       },
     );
   }
 
   Widget _buildMenuItem( { required Item item}) {
     return MenuListItem(
-        name: item.name,
-        price: item.formattedTotalItemPrice,
-        photoProvider: item.imageProvider,
+      name: item.name,
+      price: item.formattedTotalItemPrice,
+      photoProvider: item.imageProvider,
     );
   }
 } 
