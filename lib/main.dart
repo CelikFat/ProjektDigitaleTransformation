@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/footer.dart';
 import 'package:studi_cafe/sidebar.dart';
-import 'package:studi_cafe/home_page/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,11 +33,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  var selectedIndex = 0;
-
+  Widget page = appSidebarState().page;
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       // Color.fromRGBO(0xFF, 0xE6, 0xA7, 100),
       // Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
@@ -51,10 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       
-      drawer: appSidebar,
+      drawer: appSidebar(),
         
-      body: Expanded(child: HomePage(),),
-
+      body: Expanded(child: page),
 
       bottomNavigationBar: appFooter,
     );

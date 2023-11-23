@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/food_menu/menu.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
 import 'package:studi_cafe/main.dart';
 
-var appSidebar = Drawer(
-  backgroundColor: Colors.white,
+class appSidebar extends StatefulWidget {
+  const appSidebar({super.key});
+
+  @override
+  State<appSidebar> createState() => appSidebarState();
+}
+
+class appSidebarState extends State<appSidebar> {
+  Widget page = HomePage();
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+    backgroundColor: Colors.white,
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
@@ -23,7 +35,7 @@ var appSidebar = Drawer(
                 leading: const Icon(Icons.home),
                 title: const Text('Home'),
                 onTap: () {
-                  const MyApp();
+                  page = MyApp();
                 },
               ),
               ListTile(
@@ -37,7 +49,7 @@ var appSidebar = Drawer(
                 leading: const Icon(Icons.restaurant_menu),
                 title: const Text('Menü'),
                 onTap: () {
-                  const MyMenu();
+                  page = MenuPage();
                 },
               ),
               ListTile(
@@ -63,4 +75,5 @@ var appSidebar = Drawer(
               ),
             ],
           ),
-);
+  );}
+}

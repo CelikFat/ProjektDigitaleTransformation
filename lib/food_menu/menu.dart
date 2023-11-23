@@ -5,36 +5,7 @@ import 'package:studi_cafe/footer.dart';
 import 'package:studi_cafe/sidebar.dart';
 import 'package:google_fonts/google_fonts.dart' as google_fonts;
 
-void main() {
-  runApp(const MyMenu());
-}
-
-class MyMenu extends StatelessWidget {
-  const MyMenu({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HS Albsig Studi-Cafe',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100)),
-        useMaterial3: true,
-      ),
-      home: const MenuPage(),
-    );
-  }
-}
-
-@immutable
-class MenuPage extends StatefulWidget {
-  const MenuPage({super.key});
-
-  @override
-  State<MenuPage> createState() => _MenuPageState();
-}
-
-class _MenuPageState extends State<MenuPage> {
+class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +16,7 @@ class _MenuPageState extends State<MenuPage> {
           Image.asset('assets/images/app_logo_klein.png'),
         ],
       ),
-      drawer: appSidebar,
+      drawer: appSidebar(),
       body: _buildContent(),
       bottomNavigationBar: appFooter,
     );
