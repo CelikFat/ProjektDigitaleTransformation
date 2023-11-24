@@ -9,16 +9,7 @@ class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
-        actions: [
-          Image.asset('assets/images/app_logo_klein.png'),
-        ],
-      ),
-      drawer: appSidebar(),
       body: _buildContent(),
-      bottomNavigationBar: appFooter,
     );
   }
 
@@ -81,7 +72,7 @@ class MenuPage extends StatelessWidget {
                 child: Center(
                   child: Text(
                     menu.$2,
-                    style: const TextStyle(
+                    style: google_fonts.GoogleFonts.abel(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
