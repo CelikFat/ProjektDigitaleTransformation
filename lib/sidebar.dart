@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/food_menu/menu.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
-import 'package:studi_cafe/main.dart';
 
 class appSidebar extends StatefulWidget {
   const appSidebar({super.key});
@@ -35,7 +34,7 @@ class appSidebarState extends State<appSidebar> {
                 leading: const Icon(Icons.home),
                 title: const Text('Home'),
                 onTap: () {
-                  page = MyApp();
+                  page = HomePage();
                 },
               ),
               ListTile(
