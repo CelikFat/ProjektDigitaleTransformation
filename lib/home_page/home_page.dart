@@ -9,7 +9,15 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            color: const Color(0xFFD98E44),
+            decoration: BoxDecoration(
+              color: const Color(0xFFD98E44),
+              borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+              border: Border.all(
+                color: Colors.white, // White border color
+                width: 8.0, // Adjust the width of the border
+              ),
+            ),
+            
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.4,
             margin: const EdgeInsets.fromLTRB(0, 50, 0, 50),
