@@ -35,7 +35,7 @@ class MenuListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
+        borderRadius: BorderRadius.circular(30.0),
         border: Border.all(
           color: const Color(0xFFD98E44),
           width: 8.0,
