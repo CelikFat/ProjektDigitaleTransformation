@@ -60,13 +60,13 @@ class HomePage extends StatelessWidget {
                     ),
                     ...sponsors.map((sponsor) {
                       return Container(
-                        padding: EdgeInsets.all(16.0),
+                        padding: EdgeInsets.fromLTRB(260, 16, 260, 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Icon(
                               Icons.favorite,
-                              color: Colors.white, // Adjust the color as needed
+                              color: Colors.white,
                             ),
                             SizedBox(width: 8.0),
                             Text(
