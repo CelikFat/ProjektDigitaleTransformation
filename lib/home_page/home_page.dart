@@ -43,46 +43,38 @@ class HomePage extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch, 
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(16.0),
-                      child: Center(
-                        child: Text(
-                          'Unsere Sponsoren/Partner:',
-                          style: google_fonts.GoogleFonts.playfairDisplay(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
+                    Column(
+                      children: sponsors.map((sponsor) {
+                        return Container(
+                          padding: EdgeInsets.all(16.0),
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.white,
                           ),
-                        ),
-                      ),
+                        );
+                      }).toList(),
                     ),
-                    ...sponsors.map((sponsor) {
-                      return Container(
-                        padding: EdgeInsets.fromLTRB(260, 16, 260, 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.white,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: sponsors.map((sponsor) {
+                        return Container(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            sponsor,
+                            style: google_fonts.GoogleFonts.playfairDisplay(
+                              fontSize: 16.0,
                             ),
-                            SizedBox(width: 8.0),
-                            Text(
-                              sponsor,
-                              style: google_fonts.GoogleFonts.playfairDisplay(
-                                fontSize: 16.0
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   ],
                 ),
               ),
-            ),          
+            ),         
           ],
         ),
       ),
