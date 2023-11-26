@@ -10,8 +10,8 @@ class appSidebar extends StatefulWidget {
 }
 
 class appSidebarState extends State<appSidebar> {
-  Widget page = HomePage();
-  int selectedIndex = 1;
+  Widget page = MenuPage();
+  int selectedIndex = 0;
 
   final List<Widget> widgetOptions = <Widget>[
     Expanded(child: HomePage()),

@@ -8,23 +8,11 @@ import 'package:google_fonts/google_fonts.dart' as google_fonts;
 class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildContent(),
-    );
+    return _buildContent();
   }
 
   Widget _buildContent() {
-    return Stack(
-      children: [
-        Column(
-          children: [
-            Expanded(
-              child: _buildMenuLists(),
-            ),
-          ],
-        ),
-      ],
-    );
+    return _buildMenuLists();
   }
 
   Widget _buildMenuLists() {
@@ -40,7 +28,14 @@ class MenuPage extends StatelessWidget {
         if (index == 0) {
           // Display header for the entire menu list
           return Container(
-            color: const Color(0xFFD98E44),
+            decoration: BoxDecoration(
+              color: const Color(0xFFD98E44),
+              borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+              border: Border.all(
+                color: Colors.white, // White border color
+                width: 8.0, // Adjust the width of the border
+              ),
+            ),
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.2,
             child: Center(
@@ -65,7 +60,14 @@ class MenuPage extends StatelessWidget {
             children: [
               // Header for each menu
               Container(
-                color: Colors.brown, // Choose a color for the header
+                decoration: BoxDecoration(
+                  color: const Color(0xFFD98E44),
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 8.0,
+                  ),
+                ),
                 width: double.infinity,
                 padding: const EdgeInsets.all(8),
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
