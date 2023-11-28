@@ -53,4 +53,11 @@ const List<Item> exampleMenu2 = [
     imageProvider: NetworkImage('https://flutter'
         '.dev/docs/cookbook/img-files/effects/split-check/Food3.jpg'),
   ),
+  Item(
+    name: 'aaaaaaa',
+    totalPriceCents: 1099,
+    uid: '4',
+    imageProvider: NetworkImage('https://flutter'
+        '.dev/docs/cookbook/img-files/effects/split-check/Food3.jpg'),
+  ),
 ];
