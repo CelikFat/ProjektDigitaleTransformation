@@ -42,10 +42,10 @@ class HomePage extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFD98E44),
-                  borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+                  borderRadius: BorderRadius.circular(10.0),
                   border: Border.all(
-                    color: Colors.white, // White border color
-                    width: 8.0, // Adjust the width of the border
+                    color: Colors.white,
+                    width: 8.0,
                   ),
                 ),
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
