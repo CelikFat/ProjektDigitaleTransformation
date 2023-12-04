@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/food_menu/menu_item.dart';
 import 'package:studi_cafe/food_menu/menu_lists_file.dart';
-import 'package:studi_cafe/footer.dart';
-import 'package:studi_cafe/sidebar.dart';
 import 'package:google_fonts/google_fonts.dart' as google_fonts;
+import 'package:studi_cafe/footerbar.dart';
+import 'package:studi_cafe/headerbar.dart';
+import 'package:studi_cafe/sidebar.dart';
 
 class MenuPage extends StatelessWidget {
+  const MenuPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return _buildContent();
+    return Scaffold (
+      backgroundColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
+      appBar: const HeaderBar(),
+      drawer: const AppSidebar(),
+      body: _buildContent(),
+      bottomNavigationBar: const FooterBar(),
+    );
   }
 
   Widget _buildContent() {

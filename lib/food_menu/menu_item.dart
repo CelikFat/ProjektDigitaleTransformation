@@ -13,7 +13,7 @@ class Item {
   final String uid;
   final ImageProvider imageProvider;
   String get formattedTotalItemPrice =>
-      '\€${(totalPriceCents / 100.0).toStringAsFixed(2)}';
+      '€${(totalPriceCents / 100.0).toStringAsFixed(2)}';
 }
 
 
