@@ -1,10 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/Events/event.dart';
-import 'package:studi_cafe/appBar.dart';
-import 'package:studi_cafe/footer.dart';
-import 'package:studi_cafe/sidebar.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
 
 
 void main() {
@@ -21,66 +17,26 @@ class MyApp extends StatelessWidget {
       title: 'HS Albsig Studi-Cafe',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100)),
+        //colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: ''),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // Color.fromRGBO(0xFF, 0xE6, 0xA7, 100),
-      // Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
-      // Color.fromRGBO(0xBB, 0x94, 0x57, 100),
-      backgroundColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
-      appBar: appAppBar,
-      
-      drawer: appSidebar,
-        
-      body: appListview,
-
-        /*Center(
-        child:
-        Column(  
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text (
-              "Willkommen im Studi-Cafe",
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            Text (
-              'unsere Sponsoren:',
-            ),    
-            SizedBox(height: 30),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton(onPressed: null, child: Text('KSK')),
-                ElevatedButton(onPressed: null, child: Text('SIA')),
-              ],
-            ),
-            
-          ],
-        ),
-      ),
-      */
-
-    bottomNavigationBar: appFooter,
-    );
+    // down the line, implement changing layouts for screen size here
+    return const HomePage();
   }
 }

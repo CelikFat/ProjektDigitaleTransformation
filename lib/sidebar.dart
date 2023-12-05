@@ -1,15 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/food_menu/menu.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
 
-var appSidebar = Drawer(
-  backgroundColor: Colors.white,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(0x43, 0x28, 0x18, 25),
-                ),
-                child: Text(
+class AppSidebar extends StatefulWidget {
+  const AppSidebar({super.key});
+
+  @override
+  State<AppSidebar> createState() => AppSidebarState();
+}
+
+class AppSidebarState extends State<AppSidebar> {
+  final List<Widget> widgetOptions = <Widget>[
+    const HomePage(),
+    const MenuPage(),
+  ];
+
+  void onItemTapped(BuildContext context, int index) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => widgetOptions[index],
+      )
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Material(
+        color: Colors.white,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(0x43, 0x28, 0x18, 25),
+              ),
+              child: Center(
+                child: Text( 
                   'Menü',
                   style: TextStyle(
                     color: Colors.white,
@@ -17,48 +44,40 @@ var appSidebar = Drawer(
                   ),
                 ),
               ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Home'),
-                onTap: () {
-                  // Aktion bei Klick auf "Info"
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.meeting_room_outlined),
-                title: Text('Räume'),
-                onTap: () {
-                  // Aktion bei Klick auf "Info"
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.restaurant_menu),
-                title: Text('Menü'),
-                onTap: () {
-                  // Aktion bei Klick auf "Räume"
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.event),
-                title: Text('Events'),
-                onTap: () {
-                  // Aktion bei Klick auf "Kontakt"
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.info_outline),
-                title: Text('Info'),
-                onTap: () {
-                  // Aktion bei Klick auf "Räume"
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.contacts),
-                title: Text('Kontakt'),
-                onTap: () {
-                  // Aktion bei Klick auf "Räume"
-                },
-              ),
-            ],
-          ),
-);
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () => onItemTapped(context, 0),
+            ),
+            ListTile(
+              leading: const Icon(Icons.meeting_room_outlined),
+              title: const Text('Räume'),
+              onTap: () => onItemTapped(context, 0),
+            ),
+            ListTile(
+              leading: const Icon(Icons.restaurant_menu),
+              title: const Text('Menü'),
+              onTap: () => onItemTapped(context, 1),
+            ),
+            ListTile(
+              leading: const Icon(Icons.event),
+              title: const Text('Events'),
+              onTap: () => onItemTapped(context, 0),
+            ),
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: const Text('Info'),
+              onTap: () => onItemTapped(context, 0),
+            ),
+            ListTile(
+              leading: const Icon(Icons.contacts),
+              title: const Text('Kontakt'),
+              onTap: () => onItemTapped(context, 0),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
