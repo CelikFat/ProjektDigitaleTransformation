@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/Events/event.dart';
+import 'package:studi_cafe/appBar.dart';
 import 'package:studi_cafe/footer.dart';
 import 'package:studi_cafe/sidebar.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // double widthEvents = MediaQuery.of(context).size.width *0.6;
     return MaterialApp(
-      title: 'HS Albsig Studi-Cafe hahaha',
+      title: 'HS Albsig Studi-Cafe',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100)),
@@ -42,17 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
       // Color.fromRGBO(0xBB, 0x94, 0x57, 100),
       backgroundColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
-        title: Text(widget.title),
-        actions: [
-          Image.asset('assets/images/app_logo_klein.png'),
-        ],
-      ),
+      appBar: appAppBar,
       
       drawer: appSidebar,
         
-      body: Center(
+      body: appListview,
+
+        /*Center(
         child:
         Column(  
           mainAxisAlignment: MainAxisAlignment.center,
@@ -78,9 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      */
 
-
-      bottomNavigationBar: appFooter,
+    bottomNavigationBar: appFooter,
     );
   }
 }
