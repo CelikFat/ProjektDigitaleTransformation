@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/contact_page/contact_page.dart';
 import 'package:studi_cafe/food_menu/menu.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
 
@@ -13,6 +14,7 @@ class AppSidebarState extends State<AppSidebar> {
   final List<Widget> widgetOptions = <Widget>[
     const HomePage(),
     const MenuPage(),
+    const ContactPage(),
   ];
 
   void onItemTapped(BuildContext context, int index) {
@@ -73,7 +75,7 @@ class AppSidebarState extends State<AppSidebar> {
             ListTile(
               leading: const Icon(Icons.contacts),
               title: const Text('Kontakt'),
-              onTap: () => onItemTapped(context, 0),
+              onTap: () => onItemTapped(context, 2),
             ),
           ],
         ),
