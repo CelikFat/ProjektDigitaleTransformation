@@ -27,9 +27,9 @@ class ContactPage extends StatelessWidget {
         Center(
           child: Text(
             'Möglichkeiten uns zu erreichen:'
-            '\nUnsere E-Mail: info@StudiCafe-albsig.de'
+            '\n\nUnsere E-Mail: info@StudiCafe-albsig.de'
             '\nUnsere Telefon-Nr: 0000 0000'
-            '\nOder über unser Formular:',
+            '\n\nOder über unser Formular:',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
@@ -92,6 +92,25 @@ class _ContactFormState extends State<ContactForm> {
                 border: OutlineInputBorder(),
                 hintText: 'Enter your email',
               ),
+              // The validator receives the text that the user has entered.
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(150,0,150,10),
+            child: TextFormField(
+              controller: emailController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter your feedback here',
+              ),
+              minLines: 10,
+              maxLines: 15,
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
