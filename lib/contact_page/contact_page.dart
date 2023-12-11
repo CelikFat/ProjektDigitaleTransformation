@@ -35,9 +35,7 @@ class ContactPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 75),
-        ContactForm(
-          
-        ),
+        ContactForm(),
       ],
     );
   }
@@ -50,9 +48,77 @@ class ContactForm extends StatefulWidget {
 }
 
 class _ContactFormState extends State<ContactForm> {
+  //globaler Key, zur Identifizierung der Form
+  final _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    throw UnimplementedError();
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget> [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(150,0,150,10),
+            child: TextFormField(
+              controller: nameController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter your full name',
+              ),
+              // The validator receives the text that the user has entered.
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(150,0,150,10),
+            child: TextFormField(
+              controller: emailController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter your email',
+              ),
+              // The validator receives the text that the user has entered.
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    // Retrieve the text that the user has entered by using the
+                    // TextEditingController.
+                    content: Text(nameController.text + " \n" + emailController.text),
+                  );
+                },
+              );
+            },
+            child: const Text('Submit'),
+          ),
+        ]
+      ),
+    );
   }
 
 }
