@@ -33,6 +33,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^6.1.0
   email_validator: ^2.0.1
+  flutter_email_sender: ^6.0.2
 
 dev_dependencies:
   flutter_test:
