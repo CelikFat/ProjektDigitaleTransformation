@@ -5,8 +5,6 @@ import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/sidebar.dart';
 
-import 'package:email_validator/email_validator.dart';
-
 
 class ContactPage extends StatelessWidget {
   const ContactPage({super.key});
@@ -23,7 +21,7 @@ class ContactPage extends StatelessWidget {
   }
 
   Column contactPageBuilder() {
-    return Column(
+    return const Column(
       children: [
         SizedBox(height: 75),
         Center(
@@ -37,19 +35,21 @@ class ContactPage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 75),
-        ContactForm(),
+        _ContactForm(),
       ],
     );
   }
 }
 
 
-class ContactForm extends StatefulWidget {
+class _ContactForm extends StatefulWidget {
+  const _ContactForm();
+
   @override
   _ContactFormState createState() => _ContactFormState();
 }
 
-class _ContactFormState extends State<ContactForm> {
+class _ContactFormState extends State<_ContactForm> {
   // globaler Key, zur Identifizierung der Form
   final _formKey = GlobalKey<FormState>();
   // damit die Form erst submitted werden kann, wenn alles korrekt ausgefüllt ist
@@ -95,7 +95,7 @@ class _ContactFormState extends State<ContactForm> {
             name: "E-Mail Adresse hier",
             validator: (value) {
               String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-              RegExp regExp = new RegExp(p);
+              RegExp regExp = RegExp(p);
               if (!regExp.hasMatch(value!)) {
                 return 'Bitte gib eine gültige E-Mail an';
               }
