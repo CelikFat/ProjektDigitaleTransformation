@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studi_cafe/Events/EventList.dart';
+import 'package:studi_cafe/Events/event_list.dart';
 
 
 var appListview = ListView.builder(
