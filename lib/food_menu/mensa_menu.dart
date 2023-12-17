@@ -1,82 +1,87 @@
+class Canteen {
+  final String canteenId;
+  final String canteen;
+  final List<MenuItem> menus;
 
-class MensaList {
-  String canteenId;
-  String canteen;
-  List<MensaMenu> menus;
-  
-  MensaList({
+  const Canteen({
     required this.canteenId,
     required this.canteen,
     required this.menus,
   });
 
-  factory MensaList.fromJson(Map<String, dynamic> json) {
-    final currentDate = DateTime.now();
+  factory Canteen.fromJson(Map<String, dynamic> jsonData) {
 
-    return MensaList(
-      canteenId: json['canteenId'] as String,
-      canteen: json['canteen'] as String,
-      menus: (json['menus'] as List<dynamic>)
-        .map((menuJson) => MensaMenu.fromJson(menuJson as Map<String, dynamic>))
-        .where((menu) =>
-          menu.menuLine.contains("Tagesmenü")
-          && DateTime.parse(menu.menuDate).isAtSameMomentAs(currentDate))
-        .toList(),
-    );
+    if (jsonData.containsKey('canteenId') && jsonData.containsKey('canteen')) {
+      final currentDate = DateTime.now();
+      final List<dynamic> rawMenus = jsonData['menus'];
+      final List<MenuItem> parsedMenus =
+          rawMenus
+          .where((menu) => menu["menuLine"].contains("Tagesmenü"))
+          .where((menu) => DateTime.parse(menu['menuDate']).isBefore(currentDate))
+          .map((menu) => MenuItem.fromJson(menu)).toList();
+          
+      return Canteen(
+        canteenId: jsonData['canteenId'] as String,
+        canteen: jsonData['canteen'] as String,
+        menus: parsedMenus,
+      );
+    } else {
+      throw FormatException('Failed to format Canteen. Missing required keys.');
+    }
   }
-  
-  @override
-  String toString() {
-    return 'MensaMenu { canteenId: $canteenId, canteen: $canteen, menus: $menus }';
-  }
-
 }
 
 
-class MensaMenu {
-  String menuLine;
-  String thumbnail;
-  String medium;
-  String large;
-  String full;
-  String studentPrice;
-  String guestPrice;
-  String pupilPrice;
-  String menuDate;
-  List<String> menuItems;   // heißt im JSON-Objekt menu
+class MenuItem {
+  final String id;
+  final String menuLine;
+  final Map<String, dynamic> photo;
+  final String studentPrice;
+  final String guestPrice;
+  final String pupilPrice;
+  final String menuDate;
+  final List<dynamic> menu;
+  final List<dynamic> meats;
+  final List<dynamic> icons;
+  final List<dynamic> filtersInclude;
+  final List<dynamic> allergens;
+  final List<dynamic> additives;
+  final dynamic co2;
 
 
-  MensaMenu({
+  MenuItem({
+    required this.id,
     required this.menuLine,
-    required this.thumbnail,
-    required this.medium,
-    required this.large,
-    required this.full,
+    required this.photo,
     required this.studentPrice,
     required this.guestPrice,
     required this.pupilPrice,
     required this.menuDate,
-    required this.menuItems,
+    required this.menu,
+    required this.meats,
+    required this.icons,
+    required this.filtersInclude,
+    required this.allergens,
+    required this.additives,
+    required this.co2,
   });
 
-
-  factory MensaMenu.fromJson(Map<String, dynamic> json) {
-    return MensaMenu(
-      menuLine: json['menuLine'] as String,
-      thumbnail: json['photo']['thumbnail'] as String,
-      medium: json['photo']['medium'] as String,
-      large: json['photo']['large'] as String,
-      full: json['photo']['full'] as String,
-      studentPrice: json['studentPrice'] as String,
-      guestPrice: json['guestPrice'] as String,
-      pupilPrice: json['pupilPrice'] as String,
-      menuDate: json['menuDate'] as String,
-      menuItems: (json['menu'] as List<dynamic>).map((e) => e as String).toList(),
+  factory MenuItem.fromJson(Map<String, dynamic> json) {
+    return MenuItem(
+      id: json['id'],
+      menuLine: json['menuLine'],
+      photo: json['photo'],
+      studentPrice: json['studentPrice'],
+      guestPrice: json['guestPrice'],
+      pupilPrice: json['pupilPrice'],
+      menuDate: json['menuDate'],
+      menu: json['menu'],
+      meats: json['meats'],
+      icons: json['icons'],
+      filtersInclude: json['filtersInclude'],
+      allergens: json['allergens'],
+      additives: json['additives'],
+      co2: json['co2'],
     );
-  }
-
-  @override
-  String toString() {
-    return 'MensaMenu { menuLine: $menuLine, thumbnail: $thumbnail, studentPrice: $studentPrice, guestPrice: $guestPrice, menuDate: $menuDate, menuItems: $menuItems }';
   }
 }

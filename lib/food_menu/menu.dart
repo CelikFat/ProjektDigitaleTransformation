@@ -12,8 +12,22 @@ import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/sidebar.dart';
 
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
+
+  @override
+  State<MenuPage> createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+
+  late Future<Canteen> futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+    futureAlbum = fetchCanteen();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +127,6 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-
   Widget _buildMenuItem( { required Item item}) {
     return MenuListItem(
       name: item.name,
@@ -122,61 +135,39 @@ class MenuPage extends StatelessWidget {
     );
   }
 
-
   Widget _buildMensaList() {
-  return FutureBuilder<MensaList>(
-    future: fetchMensaMenu(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        // While the data is still loading, display a loading indicator or placeholder
-        return CircularProgressIndicator();
-      } else if (snapshot.hasError) {
-        // If there's an error, display an error message
-        return Text('Error: ${snapshot.error}');
-      } else if (!snapshot.hasData || snapshot.data!.menus.isEmpty) {
-        // If there's no data or the menus list is empty, display a message
-        return Text('No menu data available');
-      } else {
-        // If the data is available, build the UI with Text widgets
-        return Column(
-          children: [
-            _buildMenuHeader("Mensa"),
-            Text("${snapshot.data!.canteenId}"),
-            Text("${snapshot.data!.canteen}"),
-            Text("${snapshot.data!.menus}"),
-            for (MensaMenu menu in snapshot.data!.menus)
-              Column(
-                children: [
-                  Text('Menu Line: ${menu.menuLine}'),
-                  Text('Thumbnail: ${menu.thumbnail}'),
-                  Text('Student Price: ${menu.studentPrice}'),
-                  Text('Guest Price: ${menu.guestPrice}'),
-                  Text('Menu Date: ${menu.menuDate}'),
-                  // Additional Text widgets for other attributes
-                  const Divider(), // Add a divider between menus
-                ],
-              ),
-          ],
-        );
-      }
-    },
-  );
-}
-
-
-  Future<MensaList> fetchMensaMenu() async {
-    final response = await http.get(
-      Uri.parse('https://www.my-stuwe.de/wp-json/mealplans/v1/canteens/645?lang=de')
+    return FutureBuilder<Canteen>(
+      future: futureAlbum,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: [
+              Text(snapshot.data!.canteen),
+              Text(snapshot.data!.canteenId),
+              for (MenuItem menuItem in snapshot.data!.menus)
+                Text(menuItem.menuLine + "\t" + menuItem.menuDate),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+        // By default, show a loading spinner.
+        return const CircularProgressIndicator();
+      },
     );
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonData = jsonDecode(response.body);
-      print(jsonData.entries);
-      return MensaList.fromJson(jsonData);
-    } else {
-      throw Exception('Failed to load MensaMenu');
-    }
   }
-  
+
+  Future<Canteen> fetchCanteen() async {
+  final response = await http
+      .get(Uri.parse('https://www.my-stuwe.de/wp-json/mealplans/v1/canteens/645/'));
+      
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> jsonData = jsonDecode(response.body);
+    return Canteen.fromJson(jsonData["645"]);
+  } else {
+    throw Exception('Failed to load album');
+  }
+}
 } 
 
 
