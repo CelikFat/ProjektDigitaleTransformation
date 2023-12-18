@@ -35,14 +35,11 @@ class _MenuPageState extends State<MenuPage> {
       backgroundColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
       appBar: const HeaderBar(),
       drawer: const AppSidebar(),
-      body: _buildContent(),
+      body: _buildMenuLists(),
       bottomNavigationBar: const FooterBar(),
     );
   }
 
-  Widget _buildContent() {
-    return _buildMenuLists();
-  }
 
   Widget _buildMenuLists() {
     return ListView.separated(
@@ -55,31 +52,7 @@ class _MenuPageState extends State<MenuPage> {
       },
       itemBuilder: (context, index) {
         if (index == 0) {
-          return Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFFD98E44),
-              borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
-              border: Border.all(
-                color: Colors.white, // White border color
-                width: 8.0, // Adjust the width of the border
-              ),
-            ),
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.2,
-            child: Center(
-              child: Text(
-                'Speisekarte StudiCafe Albstadt',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: google_fonts.GoogleFonts.dancingScript(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  fontStyle: FontStyle.italic,
-                  wordSpacing: 2.0,
-                ),
-              ),
-            ),
-          );
+          return _buildPageHeader(context);
         } else if (index <= listMenus.length) {
           final menu = listMenus[index - 1];
           return Column(
@@ -100,6 +73,36 @@ class _MenuPageState extends State<MenuPage> {
       },
     );
   }
+
+
+  Container _buildPageHeader(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFD98E44),
+        borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+        border: Border.all(
+          color: Colors.white, // White border color
+          width: 8.0, // Adjust the width of the border
+        ),
+      ),
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.2,
+      child: Center(
+        child: Text(
+          'Speisekarte StudiCafe Albstadt',
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          style: google_fonts.GoogleFonts.dancingScript(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            fontStyle: FontStyle.italic,
+            wordSpacing: 2.0,
+          ),
+        ),
+      ),
+    );
+  }
+
 
   Widget _buildMenuHeader(String menuName) {
     return Container(
@@ -127,7 +130,8 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget _buildMenuItem( { required Item item}) {
+
+  Widget _buildMenuItem( { required Item item }) {
     return MenuListItem(
       name: item.name,
       price: item.formattedTotalItemPrice,
@@ -135,17 +139,29 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
+
   Widget _buildMensaList() {
     return FutureBuilder<Canteen>(
       future: futureAlbum,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(snapshot.data!.canteen),
-              Text(snapshot.data!.canteenId),
-              for (MenuItem menuItem in snapshot.data!.menus)
-                Text(menuItem.menuLine + "\t" + menuItem.menuDate),
+              _buildMenuHeader( snapshot.data!.canteen ),
+              snapshot.data!.menus.isEmpty
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(child: Text("Die Mensa hat für heute kein Menü")),
+              )
+              : Column(
+                children: snapshot.data!.menus.map((item) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: _buildMensaItem(item),
+                  );
+                }).toList(),
+              ),
             ],
           );
         } else if (snapshot.hasError) {
@@ -157,17 +173,89 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
+
   Future<Canteen> fetchCanteen() async {
-  final response = await http
-      .get(Uri.parse('https://www.my-stuwe.de/wp-json/mealplans/v1/canteens/645/'));
-      
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> jsonData = jsonDecode(response.body);
-    return Canteen.fromJson(jsonData["645"]);
-  } else {
-    throw Exception('Failed to load album');
+    final response = await http
+        .get(Uri.parse('https://www.my-stuwe.de/wp-json/mealplans/v1/canteens/645/'));
+        
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> jsonData = jsonDecode(response.body);
+      return Canteen.fromJson(jsonData["645"]);
+    } else {
+      throw Exception('Failed to load album');
+    }
   }
-}
+  
+
+  Widget _buildMensaItem(MensaMenuItem item) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        border: Border.all(
+          color: const Color(0xFFD98E44),
+          width: 8.0,
+        ),
+      ),
+      child: Material(
+        elevation: 12,
+        borderRadius: BorderRadius.circular(20),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox(
+                  width: 120,
+                  height: 120,
+                  child: Center(
+                    child: Image.asset('assets/menu/coming_soon_medium.jpg')
+                  ),
+                ),
+              ),
+              const SizedBox(width: 30),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.menu.first,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 18,
+                          ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      "Studenten: ${item.studentPrice} €",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                    ),
+                    Text(
+                      "Externe: ${item.guestPrice} €",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                    ),
+                    Text(
+                      "Am: ${item.menuDate}",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 } 
 
 

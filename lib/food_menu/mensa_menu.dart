@@ -1,7 +1,8 @@
+
 class Canteen {
   final String canteenId;
   final String canteen;
-  final List<MenuItem> menus;
+  final List<MensaMenuItem> menus;
 
   const Canteen({
     required this.canteenId,
@@ -12,13 +13,20 @@ class Canteen {
   factory Canteen.fromJson(Map<String, dynamic> jsonData) {
 
     if (jsonData.containsKey('canteenId') && jsonData.containsKey('canteen')) {
-      final currentDate = DateTime.now();
+      final DateTime currentTime = DateTime.now();
+      final int currentYear = currentTime.year;
+      final int currentMonth = currentTime.month;
+      final int currentDay = currentTime.day - 1;
+
       final List<dynamic> rawMenus = jsonData['menus'];
-      final List<MenuItem> parsedMenus =
+      final List<MensaMenuItem> parsedMenus =
           rawMenus
           .where((menu) => menu["menuLine"].contains("Tagesmenü"))
-          .where((menu) => DateTime.parse(menu['menuDate']).isBefore(currentDate))
-          .map((menu) => MenuItem.fromJson(menu)).toList();
+          .where((menu) =>
+            DateTime.parse(menu['menuDate']).year == currentYear 
+            && DateTime.parse(menu['menuDate']).month == currentMonth
+            && DateTime.parse(menu['menuDate']).day == currentDay)
+          .map((menu) => MensaMenuItem.fromJson(menu)).toList();
           
       return Canteen(
         canteenId: jsonData['canteenId'] as String,
@@ -26,13 +34,13 @@ class Canteen {
         menus: parsedMenus,
       );
     } else {
-      throw FormatException('Failed to format Canteen. Missing required keys.');
+      throw const FormatException('Failed to format Canteen. Missing required keys.');
     }
   }
 }
 
 
-class MenuItem {
+class MensaMenuItem {
   final String id;
   final String menuLine;
   final Map<String, dynamic> photo;
@@ -49,7 +57,7 @@ class MenuItem {
   final dynamic co2;
 
 
-  MenuItem({
+  MensaMenuItem({
     required this.id,
     required this.menuLine,
     required this.photo,
@@ -66,8 +74,8 @@ class MenuItem {
     required this.co2,
   });
 
-  factory MenuItem.fromJson(Map<String, dynamic> json) {
-    return MenuItem(
+  factory MensaMenuItem.fromJson(Map<String, dynamic> json) {
+    return MensaMenuItem(
       id: json['id'],
       menuLine: json['menuLine'],
       photo: json['photo'],
