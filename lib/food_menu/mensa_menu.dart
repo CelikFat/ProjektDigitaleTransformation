@@ -16,7 +16,7 @@ class Canteen {
       final DateTime currentTime = DateTime.now();
       final int currentYear = currentTime.year;
       final int currentMonth = currentTime.month;
-      final int currentDay = currentTime.day - 1;
+      final int currentDay = currentTime.day;
 
       final List<dynamic> rawMenus = jsonData['menus'];
       final List<MensaMenuItem> parsedMenus =

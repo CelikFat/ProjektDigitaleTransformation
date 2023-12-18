@@ -150,8 +150,8 @@ class _MenuPageState extends State<MenuPage> {
             children: [
               _buildMenuHeader( snapshot.data!.canteen ),
               snapshot.data!.menus.isEmpty
-              ? Padding(
-                padding: const EdgeInsets.all(8.0),
+              ? const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Center(child: Text("Die Mensa hat für heute kein Menü")),
               )
               : Column(

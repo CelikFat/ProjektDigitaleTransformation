@@ -20,23 +20,25 @@ class ContactPage extends StatelessWidget {
     );
   }
 
-  Column contactPageBuilder() {
-    return const Column(
-      children: [
-        SizedBox(height: 75),
-        Center(
-          child: Text(
-            'Möglichkeiten uns zu erreichen:'
-            '\n\nUnsere E-Mail: info@StudiCafe-albsig.de'
-            '\nUnsere Telefon-Nr: 0000 0000'
-            '\n\nOder über unser Formular:',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
+  SingleChildScrollView contactPageBuilder() {
+    return const SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 75),
+          Center(
+            child: Text(
+              'Möglichkeiten uns zu erreichen:'
+              '\n\nUnsere E-Mail: info@StudiCafe-albsig.de'
+              '\nUnsere Telefon-Nr: 0000 0000'
+              '\n\nOder über unser Formular:',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20),
+            ),
           ),
-        ),
-        SizedBox(height: 75),
-        _ContactForm(),
-      ],
+          SizedBox(height: 75),
+          _ContactForm(),
+        ],
+      ),
     );
   }
 }
@@ -105,7 +107,7 @@ class _ContactFormState extends State<_ContactForm> {
           TextFields(
             controller: textController,
             name: "Feedback hier",
-            minLines: 10,
+            minLines: 5,
             maxLines: 15,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -117,20 +119,34 @@ class _ContactFormState extends State<_ContactForm> {
           ElevatedButton(
             onPressed: _enableBtn
               ? (() async {
-                  final Email email = Email(
-                    body: "Dieses Feedback stammt von ${nameController.text} mit E-Mail ${emailController.text}:\n\n\n${textController.text}",
-                    subject: "Kontakt-Form Submission von ${nameController.text}",
-                    recipients: ['speiervi@hs-albsig.de'],
-                    isHTML: false,
-                  );
+                final Email email = Email(
+                  body: "Dieses Feedback stammt von ${nameController.text} mit E-Mail ${emailController.text}:\n\n\n${textController.text}",
+                  subject: "Kontakt-Form Submission von ${nameController.text}",
+                  recipients: [emailController.text],
+                  isHTML: false,
+                );
+
+                String platformResponse;
+
+                try {
                   await FlutterEmailSender.send(email);
-                })
+                  platformResponse = 'success';
+                  print(platformResponse);
+                } catch (error) {
+                  print(error);
+                  platformResponse = error.toString();
+                }
+                if (!mounted) {
+                  print("Oops");
+                  return;
+                }
+              })
               : null,
             child: const Text('Submit'),
           ),
         ]
       ),
     );
-  }
+  }  
 
 }
