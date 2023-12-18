@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart' as google_fonts;
+//import 'package:google_fonts/google_fonts.dart' as google_fonts;
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/home_page/sponsors_list_file.dart';
@@ -48,9 +48,9 @@ class HomePage extends StatelessWidget {
               child: Center(
                 child: Text (
                   "Willkommen im Studi-Cafe",
-                  style: google_fonts.GoogleFonts.dancingScript(
-                    fontSize: 40,
-                  ),
+                 // style: google_fonts.GoogleFonts.dancingScript(
+                   // fontSize: 40,
+                 // ),
                 ),
               ),
             ),
@@ -87,10 +87,10 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
                             sponsor,
-                            style: google_fonts.GoogleFonts.playfairDisplay(
-                              fontSize: 16.0,
+                           // style: google_fonts.GoogleFonts.playfairDisplay(
+                             // fontSize: 16.0,
                             ),
-                          ),
+                          //),
                         );
                       }).toList(),
                     ),

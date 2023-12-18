@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/food_menu/menu_item.dart';
 import 'package:studi_cafe/food_menu/menu_lists_file.dart';
-import 'package:google_fonts/google_fonts.dart' as google_fonts;
+//import 'package:google_fonts/google_fonts.dart' as google_fonts;
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/sidebar.dart';
@@ -52,12 +52,12 @@ class MenuPage extends StatelessWidget {
                 'Speisekarte StudiCafe Albstadt',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                style: google_fonts.GoogleFonts.dancingScript(
+                /*style: google_fonts.GoogleFonts.dancingScript(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
                   fontStyle: FontStyle.italic,
                   wordSpacing: 2.0,
-                ),
+                ), */
               ),
             ),
           );
@@ -83,11 +83,11 @@ class MenuPage extends StatelessWidget {
                 child: Center(
                   child: Text(
                     menu.$2,
-                    style: google_fonts.GoogleFonts.abel(
+                   /* style: google_fonts.GoogleFonts.abel(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                    ),
+                    ), */
                   ),
                 ),
               ),

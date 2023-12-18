@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/Events/event.dart';
+import 'package:studi_cafe/Info/Info.dart';
+import 'package:studi_cafe/food_menu/menu.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
 
 
@@ -37,6 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     // down the line, implement changing layouts for screen size here
-    return const HomePage();
+    return InfoPage() ;
   }
 }
