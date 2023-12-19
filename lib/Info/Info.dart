@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/sidebar.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:studi_cafe/Info/InfoList.dart';
 
 class InfoPage extends StatelessWidget {
   @override
@@ -208,28 +208,3 @@ class _MyExpansionPanelState extends State<MyExpansionPanel> {
   }
 }
 
-class Item {
-  Item({
-    required this.question,
-    required this.answer,
-    this.isExpanded = false,
-  });
-
-  String question;
-  String answer;
-  bool isExpanded;
-}
-
-List<Item> generateItems() {
-  return [
-    Item(
-      question: 'Wo finde ich das Studiencafe?',
-      answer: 'Du findest das Studiencafe in der Vorstadt',
-    ),
-    Item(
-      question: 'Gibt es auch Kaffee im Studiencafe?',
-      answer: 'Jawohl! Es gibt super leckeren Kaffee :)',
-    ),
-    // Füge hier weitere Fragen und Antworten hinzu
-  ];
-}
