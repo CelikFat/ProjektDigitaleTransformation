@@ -220,7 +220,7 @@ class _MenuPageState extends State<MenuPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.menu.first,
+                      "${item.menu}",
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontSize: 18,
                           ),

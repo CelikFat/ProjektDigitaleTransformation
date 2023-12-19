@@ -83,7 +83,7 @@ class MensaMenuItem {
       guestPrice: json['guestPrice'],
       pupilPrice: json['pupilPrice'],
       menuDate: json['menuDate'],
-      menu: json['menu'],
+      menu: json['menu'].map((menu) => menu).toList(),
       meats: json['meats'],
       icons: json['icons'],
       filtersInclude: json['filtersInclude'],
