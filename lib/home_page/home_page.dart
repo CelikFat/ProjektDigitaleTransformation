@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.4,
               margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
-              child: Center(
+              child: const Center(
                 child: Text (
                   "Willkommen im Studi-Cafe",
                  // style: google_fonts.GoogleFonts.dancingScript(

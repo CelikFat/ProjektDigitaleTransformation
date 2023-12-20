@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/Events/event.dart';
+import 'package:studi_cafe/Info/info.dart';
 import 'package:studi_cafe/contact_page/contact_page.dart';
 import 'package:studi_cafe/food_menu/menu.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
@@ -13,7 +15,10 @@ class AppSidebar extends StatefulWidget {
 class AppSidebarState extends State<AppSidebar> {
   final List<Widget> widgetOptions = <Widget>[
     const HomePage(),
+    const HomePage(),   //ersetzen mit Raumbuchungs-Seite
     const MenuPage(),
+    const EventPage(),
+    const InfoPage(),
     const ContactPage(),
   ];
 
@@ -55,27 +60,27 @@ class AppSidebarState extends State<AppSidebar> {
             ListTile(
               leading: const Icon(Icons.meeting_room_outlined),
               title: const Text('Räume'),
-              onTap: () => onItemTapped(context, 0),
+              onTap: () => onItemTapped(context, 1),
             ),
             ListTile(
               leading: const Icon(Icons.restaurant_menu),
               title: const Text('Menü'),
-              onTap: () => onItemTapped(context, 1),
+              onTap: () => onItemTapped(context, 2),
             ),
             ListTile(
               leading: const Icon(Icons.event),
               title: const Text('Events'),
-              onTap: () => onItemTapped(context, 0),
+              onTap: () => onItemTapped(context, 3),
             ),
             ListTile(
               leading: const Icon(Icons.info_outline),
               title: const Text('Info'),
-              onTap: () => onItemTapped(context, 0),
+              onTap: () => onItemTapped(context, 4),
             ),
             ListTile(
               leading: const Icon(Icons.contacts),
               title: const Text('Kontakt'),
-              onTap: () => onItemTapped(context, 2),
+              onTap: () => onItemTapped(context, 5),
             ),
           ],
         ),

@@ -82,7 +82,7 @@ class MensaMenuItem {
       studentPrice: json['studentPrice'],
       guestPrice: json['guestPrice'],
       pupilPrice: json['pupilPrice'],
-      menuDate: json['menuDate'],
+      menuDate: json['menuDate'].split('-').reversed.join('.'),
       menu: json['menu'].map((menu) => menu).toList(),
       meats: json['meats'],
       icons: json['icons'],

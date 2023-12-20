@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "490999702136",
+    "firebase_url": "https://studicafe-albsig-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "studicafe-albsig",
+    "storage_bucket": "studicafe-albsig.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490999702136:android:a861909a7f5a44134b838d",
+        "android_client_info": {
+          "package_name": "com.example.studi_cafe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjm7-Y3FX2JQeXQMCSo4pT_97rQxji6XQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

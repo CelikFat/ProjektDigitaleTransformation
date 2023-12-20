@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:studi_cafe/contact_page/text_fields.dart';
@@ -21,18 +23,29 @@ class ContactPage extends StatelessWidget {
   }
 
   SingleChildScrollView contactPageBuilder() {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         children: [
           SizedBox(height: 75),
-          Center(
-            child: Text(
-              'Möglichkeiten uns zu erreichen:'
-              '\n\nUnsere E-Mail: info@StudiCafe-albsig.de'
-              '\nUnsere Telefon-Nr: 0000 0000'
-              '\n\nOder über unser Formular:',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
+          Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFD98E44),
+              borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+              border: Border.all(
+                color: Colors.white, // White border color
+                width: 8.0, // Adjust the width of the border
+              ),
+            ),
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'Möglichkeiten uns zu erreichen:'
+                '\n\nUnsere E-Mail: info@StudiCafe-albsig.de'
+                '\nUnsere Telefon-Nr: 0000 0000'
+                '\n\nOder über unser Formular:',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ),
           SizedBox(height: 75),

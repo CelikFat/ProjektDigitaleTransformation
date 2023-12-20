@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:studi_cafe/Info/Info.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
+import 'firebase_options.dart';
 
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const StudiCafeApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class StudiCafeApp extends StatelessWidget {
+  const StudiCafeApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +24,7 @@ class MyApp extends StatelessWidget {
         //colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const HomePage(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    // down the line, implement changing layouts for screen size here
-    return InfoPage() ;
   }
 }
