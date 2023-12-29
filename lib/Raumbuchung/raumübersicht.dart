@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String? selectedRoom;
   String? roomInfo;
-  Map<String, bool> isHovering = {}; // Hover-Status für jeden Raum
+  Map<String, bool> isHovering = {};
 
   final Map<String, String> roomDetails = {
     'Raum 1':
