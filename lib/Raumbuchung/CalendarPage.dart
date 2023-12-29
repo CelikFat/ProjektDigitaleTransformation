@@ -124,6 +124,7 @@ class _CalendarPageState extends State<CalendarPage> {
                           builder: (context) => BookingDetailsPage(
                             selectedDay: _selectedDay!,
                             selectedTimeSlot: _selectedTimeSlot!,
+                            selectedRoom: widget.roomName,
                           ),
                         ),
                       );

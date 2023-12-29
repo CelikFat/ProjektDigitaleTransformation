@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.brown,
       ),
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -26,20 +27,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String? selectedRoom;
   String? roomInfo;
+  Map<String, bool> isHovering = {}; // Hover-Status für jeden Raum
 
   final Map<String, String> roomDetails = {
     'Raum 1':
-        'Unser Besprechungsraum1 verbindet professionselles Business-Umfeld mit ansprechendem Design. Corporates finden passende Räumlichkeiten für größere Veranstaltungen und Konferenzen, gerne ergänzt um Catering & Event-Location. Das ansprechende Design, modernste Präsentation- & Soundtechnik sowie das hochwertige Mobiliar schafft die richtige Atmosphäre für effiziente Veranstaltungen und Konferenzen. ',
+        'Unser Besprechungsraum1 verbindet professionselles Business-Umfeld mit ansprechendem Design. Corporates finden passende Räumlichkeiten für größere Veranstaltungen und Konferenzen, gerne ergänzt um Catering & Event-Location. Das ansprechende Design, modernste Präsentation- & Soundtechnik sowie das hochwertige Mobiliar schafft die richtige Atmosphäre für effiziente Veranstaltungen und Konferenzen.',
     'Raum 2':
         'Tagsüber können Sie in unserem FOYER Pausencatering, Lunch oder eine Kreativpause zwischendurch genießen. Nach der Veranstaltung wird diese zur Location für Business-Events: Vom Stehempfang, Networking- bis zum gemütlichen After-Work-Event. Gerne sind wir Ihnen bei der Event-Planung behilflich.',
   };
-
-  void selectRoom(String room) {
-    setState(() {
-      selectedRoom = room;
-      roomInfo = roomDetails[room];
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text('Raumübersicht'),
       ),
-      drawer: appSidebar, // Sidebar hinzu
-      bottomNavigationBar: appFooter, // Footer hinzu
+      drawer: appSidebar,
+      bottomNavigationBar: appFooter,
       body: Column(
         children: [
           GridView.builder(
@@ -64,21 +59,39 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             itemCount: rooms.length,
             itemBuilder: (context, index) {
-              bool isSelected = rooms[index] == selectedRoom;
-              return GestureDetector(
-                onTap: () => selectRoom(rooms[index]),
-                child: Card(
-                  color: isSelected ? Colors.brown[200] : Colors.white,
-                  child: Center(
-                    child: Text(
-                      rooms[index],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+              String room = rooms[index];
+              bool isSelected = room == selectedRoom;
+              isHovering[room] = isHovering[room] ?? false;
+
+              return MouseRegion(
+                onEnter: (_) => _setHovering(room, true),
+                onExit: (_) => _setHovering(room, false),
+                child: GestureDetector(
+                  onTap: () => selectRoom(room),
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? Colors.brown[200]
+                          : isHovering[room]!
+                              ? Colors.grey[200]
+                              : Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: isSelected ? Colors.brown : Colors.grey,
+                        width: 2,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        room,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
-                  elevation: 5,
                 ),
               );
             },
@@ -99,9 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => CalendarPage(
-                              roomName:
-                                  selectedRoom!), // Raumname wird übergeben
+                          builder: (context) =>
+                              CalendarPage(roomName: selectedRoom!),
                         ),
                       );
                     },
@@ -116,5 +128,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  void _setHovering(String room, bool hovering) {
+    setState(() {
+      isHovering[room] = hovering;
+    });
+  }
+
+  void selectRoom(String room) {
+    setState(() {
+      selectedRoom = room;
+      roomInfo = roomDetails[room];
+    });
   }
 }
