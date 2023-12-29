@@ -64,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
               isHovering[room] = isHovering[room] ?? false;
 
               return MouseRegion(
+                cursor: SystemMouseCursors.click,
                 onEnter: (_) => _setHovering(room, true),
                 onExit: (_) => _setHovering(room, false),
                 child: GestureDetector(
