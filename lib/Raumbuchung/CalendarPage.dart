@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:studi_cafe/Raumbuchung/BookingDetailsPage.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class CalendarPage extends StatefulWidget {
   final String roomName;
@@ -16,6 +18,12 @@ class _CalendarPageState extends State<CalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   List<String> _selectedTimeSlots = [];
+
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting('de_DE', null);
+  }
 
   List<String> _getEventsForDay(DateTime day) {
     return List.generate(11, (index) => "${8 + index}:00 - ${9 + index}:00");
@@ -58,10 +66,16 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
           ),
           TableCalendar(
+            locale: 'de_DE',
             firstDay: DateTime.utc(2010, 10, 16),
             lastDay: DateTime.utc(2030, 3, 14),
             focusedDay: _focusedDay,
             calendarFormat: _calendarFormat,
+            availableCalendarFormats: const {
+              CalendarFormat.month: 'Monat',
+              CalendarFormat.twoWeeks: '2 Wochen',
+              CalendarFormat.week: 'Woche'
+            },
             selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
             onDaySelected: (selectedDay, focusedDay) {
               setState(() {
