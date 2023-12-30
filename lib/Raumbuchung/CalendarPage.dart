@@ -3,10 +3,9 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:studi_cafe/Raumbuchung/BookingDetailsPage.dart';
 
 class CalendarPage extends StatefulWidget {
-  final String roomName; // Parameter für den Raumnamen hinzufügen
+  final String roomName;
 
-  CalendarPage({Key? key, required this.roomName})
-      : super(key: key); // Konstruktor aktualisieren
+  CalendarPage({Key? key, required this.roomName}) : super(key: key);
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
@@ -16,26 +15,30 @@ class _CalendarPageState extends State<CalendarPage> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  String? _selectedTimeSlot; // Variable für den ausgewählten Zeit-Slot
-  Map<DateTime, List<String>> _events = {};
-  List<String> _selectedEvents = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDay = _focusedDay;
-    _events = {
-      DateTime.now().subtract(Duration(days: 30)): [
-        '8:00 - 9:00 Event A',
-        '9:00 - 10:00 Event B'
-      ],
-      DateTime.now().subtract(Duration(days: 27)): ['10:00 - 11:00 Event C'],
-      // Platz für weitere Ereignisse
-    };
-  }
+  List<String> _selectedTimeSlots = [];
 
   List<String> _getEventsForDay(DateTime day) {
     return List.generate(11, (index) => "${8 + index}:00 - ${9 + index}:00");
+  }
+
+  void _toggleTimeSlot(String timeSlot) {
+    if (_selectedTimeSlots.contains(timeSlot)) {
+      _selectedTimeSlots.remove(timeSlot);
+    } else if (_selectedTimeSlots.length >= 4) {
+      _showMaxSlotsAlert();
+    } else {
+      _selectedTimeSlots.add(timeSlot);
+    }
+    setState(() {});
+  }
+
+  void _showMaxSlotsAlert() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Es dürfen nur maximal 4 Timeslots gewählt werden"),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 
   @override
@@ -49,11 +52,8 @@ class _CalendarPageState extends State<CalendarPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Wähle den Tag an dem du ${widget.roomName} buchen möchtest', // Text aktualisiert
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold,
-              ),
+              'Wähle den Tag an dem du ${widget.roomName} buchen möchtest',
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
@@ -62,73 +62,64 @@ class _CalendarPageState extends State<CalendarPage> {
             lastDay: DateTime.utc(2030, 3, 14),
             focusedDay: _focusedDay,
             calendarFormat: _calendarFormat,
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDay, day);
-            },
+            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
             onDaySelected: (selectedDay, focusedDay) {
               setState(() {
                 _selectedDay = selectedDay;
                 _focusedDay = focusedDay;
-                _selectedEvents = _getEventsForDay(selectedDay);
+                _selectedTimeSlots.clear();
               });
             },
             onFormatChanged: (format) {
               if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
+                setState(() => _calendarFormat = format);
               }
             },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
+            onPageChanged: (focusedDay) => _focusedDay = focusedDay,
           ),
-          const SizedBox(height: 8.0),
-          Expanded(
-            child: ListView.builder(
-              itemCount: _selectedEvents.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 4.0),
-                  decoration: BoxDecoration(
-                    color: _selectedTimeSlot == _selectedEvents[index]
-                        ? Colors.brown
-                        : null,
-                    border: Border.all(),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: ListTile(
-                    title: Text(_selectedEvents[index]),
-                    onTap: () {
-                      setState(() {
-                        _selectedTimeSlot = _selectedEvents[
-                            index]; // Speichern des ausgewählten Zeit-Slots
-                      });
-                    },
-                  ),
-                );
-              },
+          if (_selectedDay != null)
+            Expanded(
+              child: ListView.builder(
+                itemCount: _getEventsForDay(_selectedDay!).length,
+                itemBuilder: (context, index) {
+                  String timeSlot = _getEventsForDay(_selectedDay!)[index];
+                  bool isSelected = _selectedTimeSlots.contains(timeSlot);
+
+                  return Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 4.0),
+                    decoration: BoxDecoration(
+                      color: isSelected ? Colors.brown : null,
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    child: ListTile(
+                      title: Text(timeSlot),
+                      onTap: () => _toggleTimeSlot(timeSlot),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          if (_selectedTimeSlot != null)
+          if (_selectedTimeSlots.isNotEmpty)
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                    child: Text('Weiter'),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => BookingDetailsPage(
-                            selectedDay: _selectedDay!,
-                            selectedTimeSlot: _selectedTimeSlot!,
-                            selectedRoom: widget.roomName,
-                          ),
+                  child: Text('Weiter'),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BookingDetailsPage(
+                          selectedDay: _selectedDay!,
+                          selectedTimeSlot: _selectedTimeSlots.join(', '),
+                          selectedRoom: widget.roomName,
                         ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
         ],

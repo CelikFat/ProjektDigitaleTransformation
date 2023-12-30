@@ -36,9 +36,19 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
     return emailRegEx.hasMatch(email);
   }
 
+  String getFormattedTimeSlots(String selectedTimeSlot) {
+    List<String> slots = selectedTimeSlot.split(', ');
+    slots.sort((a, b) => int.parse(a.split('-')[0].split(':')[0])
+        .compareTo(int.parse(b.split('-')[0].split(':')[0])));
+    return slots.join('\n');
+  }
+
   @override
   Widget build(BuildContext context) {
     String formattedDate = DateFormat('dd.MM.yyyy').format(widget.selectedDay);
+    String formattedTimeSlots = getFormattedTimeSlots(widget.selectedTimeSlot);
+    bool multipleTimeSlots = widget.selectedTimeSlot.contains(',');
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Kontaktdaten'),
@@ -64,9 +74,14 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'im Zeit-Slot ${widget.selectedTimeSlot} Uhr',
+                    multipleTimeSlots ? 'in den Zeit-Slots:' : 'im Zeit-Slot:',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18),
+                  ),
+                  Text(
+                    formattedTimeSlots,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
                   ),
                   SizedBox(height: 30),
                   Text(
