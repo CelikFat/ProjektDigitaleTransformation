@@ -2,11 +2,25 @@ import 'package:flutter/material.dart';
 //import 'package:google_fonts/google_fonts.dart' as google_fonts;
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/headerbar.dart';
-import 'package:studi_cafe/home_page/sponsors_list_file.dart';
+import 'package:studi_cafe/home_page/datenbankverbindung.dart';
 import 'package:studi_cafe/sidebar.dart';
+import 'package:studi_cafe/home_page/sponsor_list.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late DatabaseStream _databaseStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _databaseStream = DatabaseStream();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,38 +33,34 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Container homePageBuilder(BuildContext context) {
-    return Container(
+  Widget homePageBuilder(BuildContext context) {
+  return Container(
     decoration: const BoxDecoration(
       image: DecorationImage(
-        image: AssetImage('assets/homepage/experimental_background.jpg'), // Replace with your image asset path
-        fit: BoxFit.cover, // Adjust the fit as needed
+        image: AssetImage('assets/homepage/experimental_background.jpg'),
+        fit: BoxFit.cover,
       ),
     ),
     child: SingleChildScrollView(
       child: Center(
-        child: Column(  
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
                 color: const Color(0xFFD98E44),
-                borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+                borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Colors.white, // White border color
-                  width: 8.0, // Adjust the width of the border
+                  color: Colors.white,
+                  width: 8.0,
                 ),
               ),
-              
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.4,
               margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
               child: const Center(
-                child: Text (
+                child: Text(
                   "Willkommen im Studi-Cafe",
-                 // style: google_fonts.GoogleFonts.dancingScript(
-                   // fontSize: 40,
-                 // ),
                 ),
               ),
             ),
@@ -68,40 +78,30 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: sponsors.map((sponsor) {
-                        return Container(
-                          padding: const EdgeInsets.all(16.0),
-                          child: const Icon(
+                  children: _databaseStream.sponsorListe.map((Sponsor currentSponsor) {
+                    return Container(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: [
+                          const Icon(
                             Icons.favorite,
                             color: Colors.white,
                           ),
-                        );
-                      }).toList(),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: sponsors.map((sponsor) {
-                        return Container(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            sponsor,
-                           // style: google_fonts.GoogleFonts.playfairDisplay(
-                             // fontSize: 16.0,
-                            ),
-                          //),
-                        );
-                      }).toList(),
-                    ),
-                  ],
+                          Text(
+                            currentSponsor.name,
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
-            ),         
+            ),
           ],
         ),
       ),
     ),
   );
-  }
+
+}
 }
