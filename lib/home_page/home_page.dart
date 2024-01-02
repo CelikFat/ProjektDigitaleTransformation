@@ -19,7 +19,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _databaseStream = DatabaseStream();
+    _databaseStream = DatabaseStream(
+      onDataLoaded: () {
+        setState(() {});
+      },
+    );
   }
 
   @override
@@ -56,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: MediaQuery.of(context).size.height * 0.3,
               margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
               child: const Center(
                 child: Text(
@@ -70,31 +74,33 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
                   color: Colors.white,
-                  width: 8.0,
+                  width: 4.0,
                 ),
               ),
+              height: MediaQuery.of(context).size.height * 0.2,
               margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _databaseStream.sponsorListe.map((Sponsor currentSponsor) {
-                    return Container(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          const Icon(
-                            Icons.favorite,
-                            color: Colors.white,
+                child: 
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                      children: _databaseStream.sponsorListe.map((Sponsor currentSponsor) {
+                        return Container(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              const Icon(
+                                Icons.favorite,
+                                color: Colors.white,),
+            
+                              Text(
+                                currentSponsor.name,
+                              ),
+                            ],
                           ),
-                          Text(
-                            currentSponsor.name,
-                          ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                ),
+                        );
+                      }).toList(),
+                  ),
               ),
             ),
           ],
