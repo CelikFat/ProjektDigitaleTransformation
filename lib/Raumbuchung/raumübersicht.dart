@@ -1,30 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:studi_cafe/footer.dart';
+import 'package:studi_cafe/footerbar.dart';
+import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/sidebar.dart';
 import 'package:studi_cafe/Raumbuchung/CalendarPage.dart';
 
-void main() => runApp(MyApp());
+class RoomBookingPage extends StatefulWidget {
+  const RoomBookingPage({super.key});
 
-class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Raum Buchungssystem',
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-      ),
-      home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  _RoomBookingPageState createState() => _RoomBookingPageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _RoomBookingPageState extends State<RoomBookingPage> {
   String? selectedRoom;
   String? roomInfo;
   Map<String, bool> isHovering = {};
@@ -41,11 +28,9 @@ class _MyHomePageState extends State<MyHomePage> {
     List<String> rooms = roomDetails.keys.toList();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Raumübersicht'),
-      ),
-      drawer: appSidebar,
-      bottomNavigationBar: appFooter,
+      appBar: const HeaderBar(),
+      drawer: const AppSidebar(),
+      bottomNavigationBar: const FooterBar(),
       body: Column(
         children: [
           GridView.builder(

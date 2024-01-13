@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/Events/event.dart';
 import 'package:studi_cafe/Info/info.dart';
+import 'package:studi_cafe/Raumbuchung/raum%C3%BCbersicht.dart';
 import 'package:studi_cafe/contact_page/contact_page.dart';
 import 'package:studi_cafe/food_menu/menu.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
@@ -15,7 +16,7 @@ class AppSidebar extends StatefulWidget {
 class AppSidebarState extends State<AppSidebar> {
   final List<Widget> widgetOptions = <Widget>[
     const HomePage(),
-    const HomePage(),   //ersetzen mit Raumbuchungs-Seite
+    const RoomBookingPage(),
     const MenuPage(),
     const EventPage(),
     const InfoPage(),
