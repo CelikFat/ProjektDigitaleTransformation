@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/footerbar.dart';
+import 'package:studi_cafe/headerbar.dart';
+import 'package:studi_cafe/sidebar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:studi_cafe/Raumbuchung/BookingDetailsPage.dart';
 import 'package:intl/intl.dart';
@@ -52,9 +55,9 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Studi-Cafe Raumbuchung'),
-      ),
+      appBar: const HeaderBar(),
+      drawer: const AppSidebar(),
+      bottomNavigationBar: const FooterBar(),
       body: Column(
         children: [
           Padding(

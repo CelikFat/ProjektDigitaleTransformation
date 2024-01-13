@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/Raumbuchung/Kunde.dart';
 import 'package:intl/intl.dart';
+import 'package:studi_cafe/footerbar.dart';
+import 'package:studi_cafe/headerbar.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
+import 'package:studi_cafe/sidebar.dart';
 
 class ThankYouPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Buchung Bestätigt'),
-      ),
+      appBar: const HeaderBar(),
+      drawer: const AppSidebar(),
+      bottomNavigationBar: const FooterBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -31,7 +35,7 @@ class ThankYouPage extends StatelessWidget {
               ),
               ElevatedButton(
                 child: Text('zurück zur Homepage'),
-                onPressed: () {},
+                onPressed: () {const HomePage();},
               ),
               SizedBox(
                 height: 20,

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:studi_cafe/Raumbuchung/ThankYouPage.dart';
 import 'package:studi_cafe/Raumbuchung/Kunde.dart';
+import 'package:studi_cafe/footerbar.dart';
+import 'package:studi_cafe/headerbar.dart';
+import 'package:studi_cafe/sidebar.dart';
 
 class BookingDetailsPage extends StatefulWidget {
   final DateTime selectedDay;
@@ -50,103 +53,115 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
     bool multipleTimeSlots = widget.selectedTimeSlot.contains(',');
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Kontaktdaten'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Du buchst am $formattedDate,',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18),
+    
+      appBar: const HeaderBar(),
+      drawer: const AppSidebar(),
+      bottomNavigationBar: const FooterBar(),
+      body: 
+        
+        Column(
+          children: [
+            Row(
+              children: [
+                IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
+                ),
+                Text('Kontaktdaten'),
+              ],
+            ),
+            Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Du buchst am $formattedDate,',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        multipleTimeSlots ? 'in den Zeit-Slots:' : 'im Zeit-Slot:',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        formattedTimeSlots,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      SizedBox(height: 30),
+                      Text(
+                        'Gebe nun deine Kontaktdaten an:',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          labelText: 'Name',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Bitte Namen eingeben';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          labelText: 'E-Mail',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Bitte E-Mail-Adresse eingeben';
+                          }
+                          if (!isValidEmail(value)) {
+                            return 'Bitte eine gültige E-Mail-Adresse eingeben';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // Speichern der Daten
+                            Kunde.saveData(
+                                    widget.selectedRoom,
+                                    widget.selectedDay,
+                                    widget.selectedTimeSlot,
+                                    _nameController.text,
+                                    _emailController.text)
+                                .then((_) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ThankYouPage(),
+                                ),
+                              );
+                            });
+                          }
+                        },
+                        child: Text('Jetzt Buchen'),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    multipleTimeSlots ? 'in den Zeit-Slots:' : 'im Zeit-Slot:',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  Text(
-                    formattedTimeSlots,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 30),
-                  Text(
-                    'Gebe nun deine Kontaktdaten an:',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 20),
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                      border: OutlineInputBorder(),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Bitte Namen eingeben';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: 'E-Mail',
-                      border: OutlineInputBorder(),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Bitte E-Mail-Adresse eingeben';
-                      }
-                      if (!isValidEmail(value)) {
-                        return 'Bitte eine gültige E-Mail-Adresse eingeben';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Speichern der Daten
-                        Kunde.saveData(
-                                widget.selectedRoom,
-                                widget.selectedDay,
-                                widget.selectedTimeSlot,
-                                _nameController.text,
-                                _emailController.text)
-                            .then((_) {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ThankYouPage(),
-                            ),
-                          );
-                        });
-                      }
-                    },
-                    child: Text('Jetzt Buchen'),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
+                  ),
+          ],
         ),
-      ),
     );
   }
 }
