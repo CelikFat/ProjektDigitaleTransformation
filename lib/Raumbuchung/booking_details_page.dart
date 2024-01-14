@@ -150,7 +150,7 @@ class BookingDetailsPageState extends State<BookingDetailsPage> {
                                 .then((_) {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => ThankYouPage(),
+                                  builder: (context) => const ThankYouPage(),
                                 ),
                               );
                             });

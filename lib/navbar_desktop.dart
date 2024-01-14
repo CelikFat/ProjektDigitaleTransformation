@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/Info/info_page.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
-import 'package:studi_cafe/home_page/home_page_desktop.dart';
 
 class NavbarDesktop extends StatelessWidget {
+  const NavbarDesktop({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +30,7 @@ class NavbarDesktop extends StatelessWidget {
           const _NavBarItem(icon: Icons.event, title: 'Raumbuchung', page: HomePage()),
           const _NavBarItem(icon: Icons.restaurant_menu, title: 'Speisekarte', page: HomePage()),
           const _NavBarItem(icon: Icons.event_note, title: 'Events', page: HomePage()),
-          const _NavBarItem(icon: Icons.info, title: 'Info', page: HomePage()),
+          const _NavBarItem(icon: Icons.info, title: 'Info', page: InfoPage()),
           const _NavBarItem(icon: Icons.contact_phone, title: 'Kontakt', page: HomePage()),
         ],
       ),
@@ -91,5 +93,28 @@ class _NavBarItemState extends State<_NavBarItem> {
     setState(() {
       isHovered = hover;
     });
+  }
+}
+
+
+class StickyNavbarDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  StickyNavbarDelegate({required this.child});
+
+  @override
+  double get minExtent => 60; // Adjust the height as needed
+
+  @override
+  double get maxExtent => 60; // Adjust the height as needed
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }

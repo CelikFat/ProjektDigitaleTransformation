@@ -7,8 +7,8 @@ import 'package:studi_cafe/sidebar.dart';
 //import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:studi_cafe/Info/info_list.dart';
 
-class InfoPage extends StatelessWidget {
-  const InfoPage({super.key});
+class InfoPageMobile extends StatelessWidget {
+  const InfoPageMobile({super.key});
   
   static const String betriebsKonzept = 'Unser StudiCafé ist ein einladender Ort, an dem Studierendeunterschiedlicher Fachrichtungen zusammenkommen, lernen und sich austauschen können. Mit einem Fokus auf eine inspirierende Atmosphäre und Lernraummöglichkeiten möchten wir die Aufenthaltsqualität für Studierende verbessern und eine Plattform für Vernetzung und Austausch schaffen. Durch die Kooperation mit der Hochschule, Studierendenwerk, IHK, VDI, der lokalen Gemeinschaft und Unternehmen wollen wir das Studierenden Café zu einem integralen Bestandteil des Hochschullebens machen und die Studierendenbedingungen nachhaltig verbessern.';
   
@@ -53,11 +53,11 @@ class InfoPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               width: double.infinity,
               height: 200,
-              child: Center(
+              child: const Center(
                 child: Text(
                   betriebsKonzept,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     fontStyle: FontStyle.italic,

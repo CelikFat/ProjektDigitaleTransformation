@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart' as google_fonts;
-import 'package:studi_cafe/Info/info.dart';
+import 'package:studi_cafe/Info/info_mobile.dart';
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
 import 'package:studi_cafe/navbar_desktop.dart';
@@ -15,8 +15,8 @@ class HomePageDesktop extends StatelessWidget {
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverPersistentHeader(
             pinned: true,
-            delegate: _StickyNavbarDelegate(
-              child: NavbarDesktop(),
+            delegate: StickyNavbarDelegate(
+              child: const NavbarDesktop(),
             ),
           ),
         ],
@@ -99,7 +99,7 @@ class HomePageDesktop extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                           child: const Center(
                             child: Text(
-                              InfoPage.betriebsKonzept,
+                              InfoPageMobile.betriebsKonzept,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 15,
@@ -324,29 +324,5 @@ class HomePageDesktop extends StatelessWidget {
       ),
       bottomNavigationBar: const FooterBar(),
     );
-  }
-}
-
-
-
-class _StickyNavbarDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  _StickyNavbarDelegate({required this.child});
-
-  @override
-  double get minExtent => 60; // Adjust the height as needed
-
-  @override
-  double get maxExtent => 60; // Adjust the height as needed
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
-  }
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }
