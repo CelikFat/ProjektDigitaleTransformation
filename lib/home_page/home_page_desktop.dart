@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart' as google_fonts;
+import 'package:studi_cafe/Info/info.dart';
 import 'package:studi_cafe/footerbar.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
 import 'package:studi_cafe/navbar_desktop.dart';
 
 class HomePageDesktop extends StatelessWidget {
@@ -37,9 +39,9 @@ class HomePageDesktop extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 50),
                         Container(
-                          height: 300,
+                          height: MediaQuery.of(context).size.height * 0.25,
                           decoration: BoxDecoration(
                             color: const Color(0xFFD98E44),
                             borderRadius: BorderRadius.circular(10.0),
@@ -54,6 +56,7 @@ class HomePageDesktop extends StatelessWidget {
                               style: google_fonts.GoogleFonts.dancingScript(
                                 fontSize: 50,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
@@ -69,9 +72,187 @@ class HomePageDesktop extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const Text('Placeholder Text'),
+                        Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFD98E44),
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 8.0,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Unsere Mission: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                fontStyle: FontStyle.italic,
+                                wordSpacing: 2.0,
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 20),
-                        const Text('Öffnungszeiten: Monday-Sunday, 8:00 AM - 10:00 PM'),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                          child: const Center(
+                            child: Text(
+                              InfoPage.betriebsKonzept,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+                        Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFD98E44),
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 8.0,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Unsere Öffnungszeiten: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                fontStyle: FontStyle.italic,
+                                wordSpacing: 2.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.22,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,                            
+                            children: [
+                              ListTile(
+                                leading: Icon(
+                                  Icons.favorite,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  "Montag: 8 - 17 Uhr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.favorite,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  "Dienstag: 8 - 18 Uhr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.favorite,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  "Mittwoch: 8 - 18 Uhr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.favorite,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  "Donnerstag: 8 - 18 Uhr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.favorite,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  "Freitag: 8 - 20 Uhr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.favorite,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  "Samstag: 8 - 15 Uhr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.favorite,
+                                  color: Colors.orange,
+                                ),
+                                title: Text(
+                                  "Sonntag: 10 - 15 Uhr",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+                        Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFD98E44),
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 8.0,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "So finden Sie uns: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                fontStyle: FontStyle.italic,
+                                wordSpacing: 2.0,
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 20),
                         InkWell(
                           onTap: () {
@@ -86,7 +267,6 @@ class HomePageDesktop extends StatelessWidget {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('So finden Sie zu uns: '),
                               Text(
                                 'einmal hier klicken!',
                                 style: TextStyle(
@@ -98,9 +278,32 @@ class HomePageDesktop extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
+                        Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFD98E44),
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 8.0,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Zur Raumbuchung hier: ",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                fontStyle: FontStyle.italic,
+                                wordSpacing: 2.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
-                            // Add navigation logic to Raumbuchung page
+                            const HomePage();
                           },
                           child: const Text('Raumbuchung'),
                         ),

@@ -9,10 +9,11 @@ import 'package:studi_cafe/Info/info_list.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
-
+  
+  static const String betriebsKonzept = 'Unser StudiCafé ist ein einladender Ort, an dem Studierendeunterschiedlicher Fachrichtungen zusammenkommen, lernen und sich austauschen können. Mit einem Fokus auf eine inspirierende Atmosphäre und Lernraummöglichkeiten möchten wir die Aufenthaltsqualität für Studierende verbessern und eine Plattform für Vernetzung und Austausch schaffen. Durch die Kooperation mit der Hochschule, Studierendenwerk, IHK, VDI, der lokalen Gemeinschaft und Unternehmen wollen wir das Studierenden Café zu einem integralen Bestandteil des Hochschullebens machen und die Studierendenbedingungen nachhaltig verbessern.';
+  
   @override
-  Widget build(BuildContext context) {
-     String betriebsKonzept = 'Unser StudiCafé ist ein einladender Ort, an dem Studierendeunterschiedlicher Fachrichtungen zusammenkommen, lernen und sichaustauschen können. Mit einem Fokus auf eine inspirierende Atmosphäre und Lernraummöglichkeiten möchten wir die Aufenthaltsqualität für Studierende verbessern und eine Plattform für Vernetzung und Austausch schaffen. Durch die Kooperation mit der Hochschule, Studierendenwerk, IHK, VDI, der lokalen Gemeinschaft und Unternehmen wollen wir das Studierenden Café zu einem integralen Bestandteil des Hochschullebens machen und die Studierendenbedingungen nachhaltig verbessern.';
+  Widget build(BuildContext context) {   
    return Scaffold (
       backgroundColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
       appBar: const HeaderBar(),

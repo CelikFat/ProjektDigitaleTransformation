@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/home_page/home_page.dart';
 import 'package:studi_cafe/home_page/home_page_desktop.dart';
 
 class NavbarDesktop extends StatelessWidget {
@@ -23,12 +24,12 @@ class NavbarDesktop extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          const _NavBarItem(icon: Icons.home, title: 'Home', page: HomePageDesktop()),
-          const _NavBarItem(icon: Icons.event, title: 'Raumbuchung', page: HomePageDesktop()),
-          const _NavBarItem(icon: Icons.restaurant_menu, title: 'Speisekarte', page: HomePageDesktop()),
-          const _NavBarItem(icon: Icons.event_note, title: 'Events', page: HomePageDesktop()),
-          const _NavBarItem(icon: Icons.info, title: 'Info', page: HomePageDesktop()),
-          const _NavBarItem(icon: Icons.contact_phone, title: 'Kontakt', page: HomePageDesktop()),
+          const _NavBarItem(icon: Icons.home, title: 'Home', page: HomePage()),
+          const _NavBarItem(icon: Icons.event, title: 'Raumbuchung', page: HomePage()),
+          const _NavBarItem(icon: Icons.restaurant_menu, title: 'Speisekarte', page: HomePage()),
+          const _NavBarItem(icon: Icons.event_note, title: 'Events', page: HomePage()),
+          const _NavBarItem(icon: Icons.info, title: 'Info', page: HomePage()),
+          const _NavBarItem(icon: Icons.contact_phone, title: 'Kontakt', page: HomePage()),
         ],
       ),
     );
