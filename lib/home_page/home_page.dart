@@ -46,11 +46,16 @@ class HomePage extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.4,
               margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
               child: const Center(
-                child: Text (
-                  "Willkommen im Studi-Cafe",
-                 // style: google_fonts.GoogleFonts.dancingScript(
-                   // fontSize: 40,
-                 // ),
+                child: Text(
+                  '"Willkommen im Studi-Cafe"',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    fontStyle: FontStyle.italic,
+                    wordSpacing: 2.0,
+                  ),
                 ),
               ),
             ),

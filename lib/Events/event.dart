@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/Events/event_list.dart';
+import 'package:studi_cafe/footerbar.dart';
+import 'package:studi_cafe/headerbar.dart';
+import 'package:studi_cafe/sidebar.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({super.key});
@@ -9,8 +12,52 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  @override
+ @override
   Widget build(BuildContext context) {
+    return Scaffold (
+      backgroundColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
+      appBar: const HeaderBar(),
+      drawer: const AppSidebar(),
+      body: Column(
+        children: [
+          // Hier können Sie den Container hinzufügen
+          Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFFD98E44),
+                borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+                border: Border.all(
+                  color: Colors.white, // White border color
+                  width: 8.0, // Adjust the width of the border
+                ),
+              ),
+              width: double.infinity,
+              height: 80,
+              child: const Center(
+                child: Text(
+                  'Unsere Events',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    fontStyle: FontStyle.italic,
+                    wordSpacing: 2.0,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+          Expanded(
+            // Verwenden Sie Expanded, damit die ListView den verfügbaren Platz einnimmt
+            child: _buildEventList(),
+          ),
+        ],
+      ),
+      bottomNavigationBar: const FooterBar(),
+    );
+  }
+
+  Widget _buildEventList() {
     return ListView.builder(
         itemCount: imageList.length,
         itemBuilder: (context, index) {

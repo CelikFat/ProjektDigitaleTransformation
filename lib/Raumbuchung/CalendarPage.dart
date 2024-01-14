@@ -55,6 +55,7 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(0xD4, 0xA3, 0x73, 100),
       appBar: const HeaderBar(),
       drawer: const AppSidebar(),
       bottomNavigationBar: const FooterBar(),
