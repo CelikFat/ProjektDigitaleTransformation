@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studi_cafe/Info/info_page.dart';
+import 'package:studi_cafe/contact_page/contact_page.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
 
 class NavbarDesktop extends StatelessWidget {
@@ -31,7 +32,7 @@ class NavbarDesktop extends StatelessWidget {
           const _NavBarItem(icon: Icons.restaurant_menu, title: 'Speisekarte', page: HomePage()),
           const _NavBarItem(icon: Icons.event_note, title: 'Events', page: HomePage()),
           const _NavBarItem(icon: Icons.info, title: 'Info', page: InfoPage()),
-          const _NavBarItem(icon: Icons.contact_phone, title: 'Kontakt', page: HomePage()),
+          const _NavBarItem(icon: Icons.contact_phone, title: 'Kontakt', page: ContactPage()),
         ],
       ),
     );
