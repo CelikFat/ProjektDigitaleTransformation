@@ -50,10 +50,6 @@ class InfoPage extends StatelessWidget {
            
             Container(
               padding: const EdgeInsets.all(16.0),
-              decoration: const BoxDecoration(
-                color: Color(0xFFD98E44),
-            
-              ),
               width: double.infinity,
               height: 200,
               child: Center(
