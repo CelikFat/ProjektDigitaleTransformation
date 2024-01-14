@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FooterBar extends StatelessWidget {
-  const FooterBar({super.key});
-  
+  const FooterBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -11,56 +11,73 @@ class FooterBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          TextButton(
+          _FooterBarButton(
+            label: 'Impressum',
             onPressed: () {
               // Aktion für Impressum
             },
-            child: const Text(
-              'Impressum',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
           ),
-          TextButton(
+          _FooterBarButton(
+            label: 'AGB',
             onPressed: () {
               // Aktion für AGB
             },
-            child: const Text(
-              'AGB',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),  
-            ),
           ),
-          TextButton(
+          _FooterBarButton(
+            label: 'Datenschutz',
             onPressed: () {
               // Aktion für Datenschutz
             },
-            child: const Text(
-              'Datenschutz',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
           ),
-          TextButton(
+          _FooterBarButton(
+            label: 'Über uns',
             onPressed: () {
               // Aktion für Über uns
             },
-            child: const Text(
-              'Über uns',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),  
-            ),
           ),
         ],
       ),
     );
+  }
+}
+
+class _FooterBarButton extends StatefulWidget {
+  final String label;
+  final VoidCallback onPressed;
+
+  const _FooterBarButton({
+    required this.label,
+    required this.onPressed,
+  });
+
+  @override
+  _FooterBarButtonState createState() => _FooterBarButtonState();
+}
+
+class _FooterBarButtonState extends State<_FooterBarButton> {
+  bool isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => _onHover(true),
+      onExit: (_) => _onHover(false),
+      child: TextButton(
+        onPressed: widget.onPressed,
+        child: Text(
+          widget.label,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: isHovered ? Colors.orange : Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _onHover(bool hover) {
+    setState(() {
+      isHovered = hover;
+    });
   }
 }
