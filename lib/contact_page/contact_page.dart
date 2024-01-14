@@ -26,7 +26,7 @@ class ContactPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 75),
+          const SizedBox(height: 75),
           Container(
             decoration: BoxDecoration(
               color: const Color(0xFFD98E44),
@@ -37,7 +37,7 @@ class ContactPage extends StatelessWidget {
               ),
             ),
             width: double.infinity,
-            child: Center(
+            child: const Center(
               child: Text(
                 'Möglichkeiten uns zu erreichen:'
                 '\n\nUnsere E-Mail: info@StudiCafe-albsig.de'
@@ -48,8 +48,8 @@ class ContactPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 75),
-          _ContactForm(),
+          const SizedBox(height: 75),
+          const _ContactForm(),
         ],
       ),
     );
