@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:studi_cafe/Events/event.dart';
+import 'package:studi_cafe/Events/event_page.dart';
 import 'package:studi_cafe/Info/info_page.dart';
 import 'package:studi_cafe/Raumbuchung/room_overview.dart';
 import 'package:studi_cafe/contact_page/contact_page.dart';
-import 'package:studi_cafe/food_menu/menu.dart';
+import 'package:studi_cafe/food_menu/menu_page.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
 
 class AppSidebar extends StatefulWidget {

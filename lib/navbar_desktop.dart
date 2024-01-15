@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:studi_cafe/Events/event_page.dart';
 import 'package:studi_cafe/Info/info_page.dart';
+import 'package:studi_cafe/Raumbuchung/room_overview.dart';
 import 'package:studi_cafe/contact_page/contact_page.dart';
+import 'package:studi_cafe/food_menu/menu_page.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
 
 class NavbarDesktop extends StatelessWidget {
@@ -28,9 +31,9 @@ class NavbarDesktop extends StatelessWidget {
           ),
           const Spacer(),
           const _NavBarItem(icon: Icons.home, title: 'Home', page: HomePage()),
-          const _NavBarItem(icon: Icons.event, title: 'Raumbuchung', page: HomePage()),
-          const _NavBarItem(icon: Icons.restaurant_menu, title: 'Speisekarte', page: HomePage()),
-          const _NavBarItem(icon: Icons.event_note, title: 'Events', page: HomePage()),
+          const _NavBarItem(icon: Icons.event, title: 'Raumbuchung', page: RoomBookingPage()),
+          const _NavBarItem(icon: Icons.restaurant_menu, title: 'Speisekarte', page: MenuPage()),
+          const _NavBarItem(icon: Icons.event_note, title: 'Events', page: EventPage()),
           const _NavBarItem(icon: Icons.info, title: 'Info', page: InfoPage()),
           const _NavBarItem(icon: Icons.contact_phone, title: 'Kontakt', page: ContactPage()),
         ],
