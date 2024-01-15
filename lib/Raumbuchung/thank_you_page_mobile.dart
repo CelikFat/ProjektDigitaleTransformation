@@ -37,7 +37,13 @@ class ThankYouPageMobile extends StatelessWidget {
               ),
               ElevatedButton(
                 child: const Text('zurück zur Homepage'),
-                onPressed: () {const HomePage();},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    )
+                  );
+                },
               ),
               const SizedBox(
                 height: 20,

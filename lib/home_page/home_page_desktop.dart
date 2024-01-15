@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart' as google_fonts;
 import 'package:studi_cafe/Info/info_mobile.dart';
+import 'package:studi_cafe/Raumbuchung/room_overview.dart';
+import 'package:studi_cafe/contact_page/contact_page.dart';
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/home_page/home_page.dart';
 import 'package:studi_cafe/navbar_desktop.dart';
@@ -260,7 +262,7 @@ class HomePageDesktop extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const HomePageDesktop(),
+                                builder: (context) => const ContactPage(),
                               ),
                             );
                           },
@@ -301,11 +303,28 @@ class HomePageDesktop extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () {
-                            const HomePage();
+                        InkWell(
+                          onTap: () {
+                            // Handle navigation to ContactPage
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RoomBookingPage(),
+                              ),
+                            );
                           },
-                          child: const Text('Raumbuchung'),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'einmal hier klicken!',
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.1,
