@@ -37,7 +37,7 @@ class HomePageMobileState extends State<HomePageMobile> {
     );
   }
 
-  Widget homePageBuilder(BuildContext context) {
+  Widget homePageMobileBuilder(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -77,24 +77,7 @@ class HomePageMobileState extends State<HomePageMobile> {
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFD98E44),
-                  borderRadius: BorderRadius.circular(10.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 8.0,
-                  ),
-                ),
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.3,
-                margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
-                child: const Center(
-                  child: Text(
-                    "Willkommen im Studi-Cafe",
-                  ),
-                ),
-              ),
+              
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFD98E44),
@@ -104,24 +87,31 @@ class HomePageMobileState extends State<HomePageMobile> {
                     width: 4.0,
                   ),
                 ),
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: MediaQuery.of(context).size.height * 0.4,
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 100),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                   child: 
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                         children: _databaseStream.sponsorListe.map((Sponsor currentSponsor) {
                           return Container(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center, 
                               children: [
-                                const Icon(
-                                  Icons.favorite,
-                                  color: Colors.white,),
-              
-                                Text(
-                                  currentSponsor.name,
+                                ListTile(
+                                  leading: const Icon(
+                                    Icons.favorite,
+                                    color: Colors.white,
+                                  ),
+                                  title: Text(
+                                    currentSponsor.name,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
