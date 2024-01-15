@@ -52,7 +52,6 @@ class InfoPageMobile extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16.0),
               width: double.infinity,
-              height: 200,
               child: const Center(
                 child: Text(
                   betriebsKonzept,

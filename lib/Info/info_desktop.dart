@@ -52,7 +52,7 @@ class InfoPageDesktop extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 width: double.infinity,
-                height: 200,
+                height: MediaQuery.of(context).size.height * 0.25,
                 child: const Center(
                   child: Text(
                     InfoPageMobile.betriebsKonzept,
