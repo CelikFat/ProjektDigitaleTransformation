@@ -77,24 +77,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFFD98E44),
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(
-                  color: Colors.white,
-                  width: 8.0,
-                ),
-              ),
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.3,
-              margin: const EdgeInsets.fromLTRB(0, 100, 0, 100),
-              child: const Center(
-                child: Text(
-                  "Willkommen im Studi-Cafe",
-                ),
-              ),
-            ),
+            
             Container(
               decoration: BoxDecoration(
                 color: const Color(0xFFD98E44),

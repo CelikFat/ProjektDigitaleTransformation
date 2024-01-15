@@ -1,3 +1,5 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 class Item {
   Item({
     required this.question,
@@ -10,16 +12,16 @@ class Item {
   bool isExpanded;
 }
 
-List<Item> generateItems() {
-  return [
-    Item(
-      question: 'Wo finde ich das Studiencafe?',
-      answer: 'Du findest das Studiencafe in der Vorstadt',
-    ),
-    Item(
-      question: 'Gibt es auch Kaffee im Studiencafe?',
-      answer: 'Jawohl! Es gibt super leckeren Kaffee :)',
-    ),
-    // Füge hier weitere Fragen und Antworten hinzu
-  ];
+Future<List<Item>> fetchItemsFromFirebase() async {
+  QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('FAQ').get();
+
+  List<Item> items = querySnapshot.docs.map((doc) {
+    return Item(
+      question: doc['FaqFrage'],
+      answer: doc['FaqAntwort'],
+      isExpanded: false,
+    );
+  }).toList();
+
+  return items;
 }
