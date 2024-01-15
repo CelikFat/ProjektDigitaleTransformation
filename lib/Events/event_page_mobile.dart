@@ -18,51 +18,83 @@ class _EventPageState extends State<EventPageMobile> {
       appBar: const HeaderBar(),
       drawer: const AppSidebar(),
       bottomNavigationBar: const FooterBar(),
-      body: ListView.builder(
-          itemCount: imageList.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                showDialogFunc(context, imageList[index], titleList[index], descriptionList[index]);
-              },
-              child: Card(
-                child: Row(
-                  children: <Widget>[
-                    SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Image.asset(imageList[index]),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              titleList[index],
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 10,),
-                            Text(
-                              descriptionList[index],
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+      body: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFD98E44),
+              borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+              border: Border.all(
+                color: Colors.white, // White border color
+                width: 8.0, // Adjust the width of the border
+              ),
+            ),
+            width: double.infinity,
+            height: 80,
+            child: const Center(
+              child: Text(
+                'Unsere Events',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  fontStyle: FontStyle.italic,
+                  wordSpacing: 2.0,
                 ),
               ),
-            );
-          }
-        ),
+            ),
+          ),
+          const SizedBox(height: 16.0),
+          Expanded(
+            child: ListView.builder(
+                itemCount: imageList.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      showDialogFunc(context, imageList[index], titleList[index], descriptionList[index]);
+                    },
+                    child: Card(
+                      child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Image.asset(imageList[index]),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    titleList[index],
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10,),
+                                  Text(
+                                    descriptionList[index],
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+              ),
+          ),
+        ],
+      ),
     );
   }
 

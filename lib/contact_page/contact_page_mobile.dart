@@ -26,7 +26,32 @@ class ContactPageMobile extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(height: 75),
+          Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFD98E44),
+              borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+              border: Border.all(
+                color: Colors.white, // White border color
+                width: 8.0, // Adjust the width of the border
+              ),
+            ),
+            width: double.infinity,
+            height: 80,
+            child: const Center(
+              child: Text(
+                'Kontakt',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  fontStyle: FontStyle.italic,
+                  wordSpacing: 2.0,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16.0),
           Container(
             decoration: BoxDecoration(
               color: const Color(0xFFD98E44),
