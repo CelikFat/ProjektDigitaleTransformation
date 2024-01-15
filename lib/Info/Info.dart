@@ -35,7 +35,7 @@ class InfoPage extends StatelessWidget {
               height: 80,
               child: const Center(
                 child: Text(
-                  'InfoSeite',
+                  'Infos',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
