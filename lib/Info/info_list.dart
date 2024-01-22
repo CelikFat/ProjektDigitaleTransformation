@@ -1,25 +1,26 @@
-class Item {
-  Item({
-    required this.question,
-    required this.answer,
-    this.isExpanded = false,
-  });
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  String question;
-  String answer;
-  bool isExpanded;
+class Item {
+  late String question;
+  late String answer;
+  bool isExpanded = false;
+
+  Item({required this.question, required this.answer});
 }
 
-List<Item> generateItems() {
-  return [
-    Item(
-      question: 'Wo finde ich das Studiencafe?',
-      answer: 'Du findest das Studiencafe in der Vorstadt',
-    ),
-    Item(
-      question: 'Gibt es auch Kaffee im Studiencafe?',
-      answer: 'Jawohl! Es gibt super leckeren Kaffee :)',
-    ),
-    // Füge hier weitere Fragen und Antworten hinzu
-  ];
+Future<List<Item>> fetchItemsFromFirebase() async {
+  // Replace 'your_collection' with the actual collection name in your Firestore database
+  QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('FAQ').get();
+
+  List<Item> items = [];
+
+  querySnapshot.docs.forEach((doc) {
+    // Assuming your documents have 'question' and 'answer' fields
+    String question = doc['FaqFrage'];
+    String answer = doc['FaqAntwort'];
+
+    items.add(Item(question: question, answer: answer));
+  });
+
+  return items;
 }

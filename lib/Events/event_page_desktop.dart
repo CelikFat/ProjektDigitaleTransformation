@@ -3,8 +3,21 @@ import 'package:studi_cafe/Events/event_list.dart';
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/navbar_desktop.dart';
 
-class EventPageDesktop extends StatelessWidget {
-  const EventPageDesktop({super.key});
+class EventPageDesktop extends StatefulWidget {
+  const EventPageDesktop({Key? key}) : super(key: key);
+
+  @override
+  State<EventPageDesktop> createState() => _EventPageDesktopState();
+}
+
+class _EventPageDesktopState extends State<EventPageDesktop> {
+  late Future<List<Event>> _data;
+
+  @override
+  void initState() {
+    super.initState();
+    _data = EventService().fetchEventsFromDatabase();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +36,10 @@ class EventPageDesktop extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: const Color(0xFFD98E44),
-                borderRadius: BorderRadius.circular(10.0), // Optional: Add border radius for rounded corners
+                borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Colors.white, // White border color
-                  width: 8.0, // Adjust the width of the border
+                  color: Colors.white,
+                  width: 8.0,
                 ),
               ),
               width: double.infinity,
@@ -47,49 +60,63 @@ class EventPageDesktop extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             Expanded(
-              child: ListView.builder(
-                itemCount: imageList.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      showDialogFunc(context, imageList[index], titleList[index], descriptionList[index]);
-                    },
-                    child: Card(
-                      child: Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: Image.asset(imageList[index]),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    titleList[index],
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+              child: FutureBuilder<List<Event>>(
+                future: _data,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Fehler beim Laden der Daten: ${snapshot.error}');
+                  } else {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        Event event = snapshot.data![index];
+                        return GestureDetector(
+                          onTap: () {
+                            showDialogFunc(context, event.imageUrl, event.title, event.description);
+                          },
+                          child: Card(
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: Image.network(event.imageUrl),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          event.title,
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10,),
+                                        Container(
+                                          child: Text(
+                                            event.description,
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            softWrap: true,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  const SizedBox(height: 10,),
-                                  Text(
-                                    descriptionList[index],
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  );
+                        );
+                      },
+                    );
+                  }
                 },
               ),
             ),
@@ -145,7 +172,7 @@ class EventPageDesktop extends StatelessWidget {
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: Image.asset(
+                    child: Image.network(
                       img,
                       width: 200,
                       height: 200,

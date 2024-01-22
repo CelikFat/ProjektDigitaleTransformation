@@ -161,41 +161,58 @@ class MyExpansionPanel extends StatefulWidget {
 }
 
 class _MyExpansionPanelState extends State<MyExpansionPanel> {
-  final List<Item> _data = generateItems();
+  late Future<List<Item>> _data;
+
+  @override
+  void initState() {
+    super.initState();
+    _data = fetchItemsFromFirebase();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: ExpansionPanelList(
-          expansionCallback: (int index, bool isExpanded) {
-            setState(() {
-              _data[index].isExpanded = !isExpanded;
-            });
-          },
-          children: _data.map<ExpansionPanel>((Item item) {
-            return ExpansionPanel(
-              headerBuilder: (BuildContext context, bool isExpanded) {
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      item.isExpanded = !isExpanded;
-                    });
-                  },
-                  child: ListTile(
-                    title: Text(item.question),
-                  ),
-                );
-              },
-              body: ListTile(
-                title: Text(item.answer),
+    return FutureBuilder<List<Item>>(
+      future: _data,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Fehler beim Laden der Daten: ${snapshot.error}');
+        } else {
+          return SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              child: ExpansionPanelList(
+                expansionCallback: (int index, bool isExpanded) {
+                  setState(() {
+                    snapshot.data![index].isExpanded = !isExpanded;
+                  });
+                },
+                children: snapshot.data!.map<ExpansionPanel>((Item item) {
+                  return ExpansionPanel(
+                    headerBuilder: (BuildContext context, bool isExpanded) {
+                      return InkWell(
+                        onTap: () {
+                          setState(() {
+                            item.isExpanded = !isExpanded;
+                          });
+                        },
+                        child: ListTile(
+                          title: Text(item.question),
+                        ),
+                      );
+                    },
+                    body: ListTile(
+                      title: Text(item.answer),
+                    ),
+                    isExpanded: item.isExpanded,
+                  );
+                }).toList(),
               ),
-              isExpanded: item.isExpanded,
-            );
-          }).toList(),
-        ),
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }
