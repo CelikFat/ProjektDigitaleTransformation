@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:studi_cafe/Raumbuchung/ThankYouPage.dart';
-import 'package:studi_cafe/Raumbuchung/Kunde.dart';
 import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/sidebar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookingDetailsPage extends StatefulWidget {
   final DateTime selectedDay;
@@ -164,4 +165,40 @@ class _BookingDetailsPageState extends State<BookingDetailsPage> {
         ),
     );
   }
+}
+class Kunde {
+  // ... (andere Methoden und Eigenschaften)
+
+  static Future<void> saveData(
+    String room,
+    DateTime date,
+    String timeSlot,
+    String name,
+    String email,
+  ) async {
+    try {
+      await FirebaseFirestore.instance.collection('Reservierung').add({
+        'room': room,
+        'date': date,
+        'timeSlot': timeSlot,
+        'name': name,
+        'email': email,
+      });
+      print('Daten erfolgreich in Firestore gespeichert');
+    } catch (e) {
+      print('Fehler beim Speichern der Daten in Firestore: $e');
+    }
+  }
+   static Future<Map<String, dynamic>> getData() async {
+    final prefs = await SharedPreferences.getInstance();
+    return {
+      'room': prefs.getString('room'),
+      'selectedDay': prefs.getString('selectedDay'),
+      'timeSlot': prefs.getString('timeSlot'),
+      'name': prefs.getString('name'),
+      'email': prefs.getString('email'),
+    };
+  }
+
+  // ... (andere Methoden)
 }

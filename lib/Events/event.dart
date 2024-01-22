@@ -4,6 +4,7 @@ import 'package:studi_cafe/footerbar.dart';
 import 'package:studi_cafe/headerbar.dart';
 import 'package:studi_cafe/sidebar.dart';
 
+
 class EventPage extends StatefulWidget {
   const EventPage({super.key});
 
@@ -11,13 +12,15 @@ class EventPage extends StatefulWidget {
   State<EventPage> createState() => _EventPageState();
 }
 
+
 class _EventPageState extends State<EventPage> {
   late Future<List<Event>> _data;
+  final EventService _eventService = EventService(); // Instanz der EventService-Klasse erstellen
 
   @override
   void initState() {
     super.initState();
-    _data = fetchEventsFromDatabase();
+    _data = _eventService.fetchEventsFromDatabase(); // fetchEventsFromDatabase über die Instanz aufrufen
   }
   Widget build(BuildContext context) {
     return Scaffold (

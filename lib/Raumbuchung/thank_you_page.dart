@@ -9,10 +9,11 @@ class ThankYouPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: ResponsiveLayout(
+      body: /*ResponsiveLayout(
         mobileBody: ThankYouPageMobile(),
         desktopBody: ThankYouPageDesktop()
-      ),
+      ),*/
+      ThankYouPage()
     );
   }
 }
